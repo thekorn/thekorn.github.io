@@ -1,1 +1,0 @@
-# thekorn.github.io

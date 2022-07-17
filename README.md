@@ -1,5 +1,7 @@
 # thekorn.github.io
 
+[![Build and Deploy](https://github.com/thekorn/thekorn.github.io/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/thekorn/thekorn.github.io/actions/workflows/build.yml)
+
 Source of [thekorn.github.io](https://thekorn.github.io) implemented in [astro](https://www.astro.build) using [tailwindcss](https://tailwindcss.com/) and [solidjs](https://www.solidjs.com/)
 The page design is inspired by [Google I/O](https://io.google/2022/) and Coding in public's livestream on building his own [clone](https://www.youtube.com/watch?v=Bo9s7SjZ170)
 

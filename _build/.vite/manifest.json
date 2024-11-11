@@ -1,72 +1,51 @@
 {
-  "_Counter-B6sbHZbR.js": {
-    "file": "assets/Counter-B6sbHZbR.js",
-    "name": "Counter",
+  "_routing-DNDGBKJ1.js": {
+    "file": "assets/routing-DNDGBKJ1.js",
+    "name": "routing",
     "imports": [
-      "_routing-mzCAIEhH.js"
+      "_web-DHm5m0PU.js"
     ]
   },
-  "_components-9T2_CxFk.js": {
-    "file": "assets/components-9T2_CxFk.js",
-    "name": "components",
-    "imports": [
-      "_routing-mzCAIEhH.js"
-    ]
-  },
-  "_routing-mzCAIEhH.js": {
-    "file": "assets/routing-mzCAIEhH.js",
-    "name": "routing"
+  "_web-DHm5m0PU.js": {
+    "file": "assets/web-DHm5m0PU.js",
+    "name": "web"
   },
   "src/routes/[...404].tsx?pick=default&pick=$css": {
-    "file": "assets/_...404_-C7TrDHPs.js",
+    "file": "assets/_...404_-Dl3n12cq.js",
     "name": "_...404_",
     "src": "src/routes/[...404].tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_routing-mzCAIEhH.js",
-      "_components-9T2_CxFk.js"
-    ]
-  },
-  "src/routes/about.tsx?pick=default&pick=$css": {
-    "file": "assets/about-DTLUyIrd.js",
-    "name": "about",
-    "src": "src/routes/about.tsx?pick=default&pick=$css",
-    "isEntry": true,
-    "isDynamicEntry": true,
-    "imports": [
-      "_routing-mzCAIEhH.js",
-      "_Counter-B6sbHZbR.js",
-      "_components-9T2_CxFk.js"
+      "_web-DHm5m0PU.js",
+      "_routing-DNDGBKJ1.js"
     ]
   },
   "src/routes/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-D4MqumEp.js",
+    "file": "assets/index-D29Tf8lR.js",
     "name": "index",
     "src": "src/routes/index.tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_routing-mzCAIEhH.js",
-      "_Counter-B6sbHZbR.js",
-      "_components-9T2_CxFk.js"
+      "_web-DHm5m0PU.js"
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-D9o9gcbB.js",
+    "file": "assets/client-c8YRyUYZ.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,
     "imports": [
-      "_routing-mzCAIEhH.js"
+      "_web-DHm5m0PU.js",
+      "_routing-DNDGBKJ1.js"
     ],
     "dynamicImports": [
       "src/routes/[...404].tsx?pick=default&pick=$css",
-      "src/routes/about.tsx?pick=default&pick=$css",
       "src/routes/index.tsx?pick=default&pick=$css"
     ],
     "css": [
-      "assets/client-2P6KhGU4.css"
+      "assets/client-BX1xnaTX.css"
     ]
   }
 }

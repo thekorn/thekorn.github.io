@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install
+        run: pnpm install
+
+      - name: build
+        run: pnpm build
+        env:
+          BASE_PATH: /my-app/
+
+      - name: create .nojekyll
+        run: touch .output/public/.nojekyll
+
+      - name: deploy pages
+        uses: JamesIves/github-pages-deploy-action@v4.6.9
+        with:
+          branch: gh-pages
+          folder: .output/public

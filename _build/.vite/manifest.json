@@ -1,44 +1,44 @@
 {
-  "_routing-D1J1dVS-.js": {
-    "file": "assets/routing-D1J1dVS-.js",
+  "_routing-DNDGBKJ1.js": {
+    "file": "assets/routing-DNDGBKJ1.js",
     "name": "routing",
     "imports": [
-      "_web-osA5KR6L.js"
+      "_web-DHm5m0PU.js"
     ]
   },
-  "_web-osA5KR6L.js": {
-    "file": "assets/web-osA5KR6L.js",
+  "_web-DHm5m0PU.js": {
+    "file": "assets/web-DHm5m0PU.js",
     "name": "web"
   },
   "src/routes/[...404].tsx?pick=default&pick=$css": {
-    "file": "assets/_...404_-BreMv-g4.js",
+    "file": "assets/_...404_-Dl3n12cq.js",
     "name": "_...404_",
     "src": "src/routes/[...404].tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_web-osA5KR6L.js",
-      "_routing-D1J1dVS-.js"
+      "_web-DHm5m0PU.js",
+      "_routing-DNDGBKJ1.js"
     ]
   },
   "src/routes/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-B15FiJyk.js",
+    "file": "assets/index-D29Tf8lR.js",
     "name": "index",
     "src": "src/routes/index.tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_web-osA5KR6L.js"
+      "_web-DHm5m0PU.js"
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-CndHO2ox.js",
+    "file": "assets/client-c8YRyUYZ.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,
     "imports": [
-      "_web-osA5KR6L.js",
-      "_routing-D1J1dVS-.js"
+      "_web-DHm5m0PU.js",
+      "_routing-DNDGBKJ1.js"
     ],
     "dynamicImports": [
       "src/routes/[...404].tsx?pick=default&pick=$css",

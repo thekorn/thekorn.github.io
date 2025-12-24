@@ -1,19 +1,20 @@
 ---
-
 import { getCollection } from "astro:content";
 import Github from "lucide-solid/icons/github";
 import Linkedin from "lucide-solid/icons/linkedin";
 import Mail from "lucide-solid/icons/mail";
 import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon";
+import { Show } from "solid-js/web";
 
-const posts = (await getCollection("blog", ({ data }) => {
-  if (import.meta.env.PROD) {
-    return !data.draft;
-  }
-  return true;
-})).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (
+    await getCollection("blog", ({ data }) => {
+        if (import.meta.env.PROD) {
+            return !data.draft;
+        }
+        return true;
+    })
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <Layout title="thekorn.dev">
@@ -114,6 +115,15 @@ const posts = (await getCollection("blog", ({ data }) => {
                                             "en-us",
                                         )}
                                     </span>
+                                    <Show when={!!post.data.icon}>
+                                        {(icon) => (
+                                            //@ts-ignore
+                                            <Icon
+                                                name={post.data.icon}
+                                                size={16}
+                                            />
+                                        )}
+                                    </Show>
                                     <span class="flex-1 text-(--color-fg1)">
                                         {post.data.title}
                                     </span>

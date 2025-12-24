@@ -1,8 +1,9 @@
 ---
-title: 'Managing my setups with Nix'
-description: 'How I use Nix to manage my Mac and Linux machines'
-pubDate: '2025-12-24 14:00:00'
+title: "Managing my setups with Nix"
+description: "How I use Nix to manage my Mac and Linux machines"
+pubDate: "2025-12-24 14:00:00"
 draft: false
+icon: "Cog"
 ---
 
 I have been using [Nix](https://nix.dev/) for a while now to manage my development environments and system configurations. In this post, I want to share my high-level approach and the benefits I've experienced.

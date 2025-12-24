@@ -19,7 +19,9 @@
   --color-gruvbox-orange: #fe8019;
   --color-gruvbox-gray: #928374;
 
-  --font-mono: "JetBrains Mono", "Fira Code", "Source Code Pro", "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+  --font-mono:
+    "JetBrains Mono", "Fira Code", "Source Code Pro", "SF Mono", "Menlo",
+    "Monaco", "Consolas", monospace;
 }
 
 :root {
@@ -64,7 +66,9 @@ a:hover {
   text-decoration-style: wavy;
 }
 
-code, pre, kbd {
+code,
+pre,
+kbd {
   font-family: var(--font-mono);
 }
 
@@ -103,7 +107,10 @@ code, pre, kbd {
   color: var(--color-accent-yellow);
 }
 
-.prose h1, .prose h2, .prose h3, .prose h4 {
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
   color: var(--color-fg0);
   font-weight: 600;
 }

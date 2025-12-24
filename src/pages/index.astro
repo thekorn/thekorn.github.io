@@ -1,11 +1,17 @@
 ---
-import Layout from "../layouts/Layout.astro";
+
 import { getCollection } from "astro:content";
 import Github from "lucide-solid/icons/github";
 import Linkedin from "lucide-solid/icons/linkedin";
 import Mail from "lucide-solid/icons/mail";
+import Layout from "../layouts/Layout.astro";
 
-const posts = (await getCollection("blog")).sort(
+const posts = (await getCollection("blog", ({ data }) => {
+  if (import.meta.env.PROD) {
+    return !data.draft;
+  }
+  return true;
+})).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---

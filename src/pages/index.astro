@@ -77,7 +77,12 @@ const posts = (await getCollection("blog")).sort(
 
             <section>
                 <p class="mb-4 text-(--color-accent)">
-                    <span class="text-(--color-accent-purple)">$</span> ls ./blog
+                    <span class="text-(--color-accent-purple)">$</span> alias ll="eza
+                    --icons --long --no-permissions --no-filesize --no-permissions
+                    --no-git"
+                </p>
+                <p class="mb-4 text-(--color-accent)">
+                    <span class="text-(--color-accent-purple)">$</span> ll ./blog
                 </p>
                 <ul class="list-none p-0">
                     {
@@ -87,14 +92,10 @@ const posts = (await getCollection("blog")).sort(
                                     href={`/blog/${post.slug}/`}
                                     class="flex items-center gap-3 p-3 bg-(--color-bg) border border-transparent rounded text-no-underline transition-all duration-150 hover:border-(--color-accent) hover:bg-(--color-bg-dim)"
                                 >
-                                    <span class="text-(--color-accent-blue)">
-                                        &#8594;
+                                    <span class="text-gruvbox-yellow">
+                                        thekorn
                                     </span>
-                                    <span class="flex-1 text-(--color-fg1)">
-                                        {post.data.title}
-                                    </span>
-                                    <span class="text-sm text-(--color-fg-dim)">
-                                        [
+                                    <span class="text-sm text-gruvbox-blue">
                                         {post.data.pubDate.toLocaleDateString(
                                             "en-us",
                                             {
@@ -103,7 +104,12 @@ const posts = (await getCollection("blog")).sort(
                                                 day: "2-digit",
                                             },
                                         )}
-                                        ]
+                                        {post.data.pubDate.toLocaleTimeString(
+                                            "en-us",
+                                        )}
+                                    </span>
+                                    <span class="flex-1 text-(--color-fg1)">
+                                        {post.data.title}
                                     </span>
                                 </a>
                             </li>

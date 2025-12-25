@@ -1,20 +1,21 @@
 ---
-
-import '../styles/global.css';
+import "../styles/global.css";
 const { title } = Astro.props;
 ---
+
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Personal website of thekorn" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
-  </head>
-  <body>
-    <main>
-      <slot />
-    </main>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="description" content="Personal website of thekorn" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        <title>{title}</title>
+    </head>
+    <body>
+        <main>
+            <slot />
+        </main>
+    </body>
 </html>

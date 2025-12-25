@@ -7,9 +7,9 @@ interface IconProps extends LucideProps {
 }
 
 const Icon = (props: IconProps) => {
-  const [local, others] = splitProps(props, ["name"]);
+  const [local, others] = splitProps(props, ['name']);
 
-  return <Dynamic component={icons[local.name]} {...others} />
+  return <Dynamic component={icons[local.name]} {...others} />;
 };
 
 export default Icon;

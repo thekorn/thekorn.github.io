@@ -39,7 +39,7 @@
   "html": {
     "experimentalFullSupportEnabled": true,
     "formatter": {
-      "indentScriptAndStyle": true
+      "indentScriptAndStyle": false
     }
   }
 }

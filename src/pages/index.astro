@@ -121,15 +121,9 @@ const posts = (
                                             },
                                         )}
                                     </span>
-                                    <Show
-                                        when={
-                                            isLucidIcon(post.data.icon) &&
-                                            post.data.icon
-                                        }
-                                    >
-                                        {(icon) => (
-                                            <Icon name={icon()} size={16} />
-                                        )}
+                                    <Show when={post.data.icon}>
+                                        {/* @ts-ignore */}
+                                        <Icon name={post.data.icon} size={16} />
                                     </Show>
                                     <span class="flex-1 text-(--color-fg1)">
                                         {post.data.title}

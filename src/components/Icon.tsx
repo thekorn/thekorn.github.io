@@ -6,6 +6,8 @@ interface IconProps extends LucideProps {
   name: keyof typeof icons;
 }
 
+export const isLucidIcon = (name?: string): name is keyof typeof icons => name in icons;
+
 const Icon = (props: IconProps) => {
   const [local, others] = splitProps(props, ['name']);
 

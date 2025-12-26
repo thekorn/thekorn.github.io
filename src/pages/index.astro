@@ -6,7 +6,7 @@ import Github from "lucide-solid/icons/github";
 import Linkedin from "lucide-solid/icons/linkedin";
 import Mail from "lucide-solid/icons/mail";
 import { Show } from "solid-js/web";
-import Icon from "../components/Icon";
+import Icon, { isLucidIcon } from "../components/Icon";
 import Layout from "../layouts/Layout.astro";
 
 const posts = (
@@ -106,7 +106,7 @@ const posts = (
                                     </span>
                                     <span class="text-sm text-gruvbox-blue">
                                         {post.data.pubDate.toLocaleDateString(
-                                            "en-us",
+                                            "en-gb",
                                             {
                                                 year: "numeric",
                                                 month: "short",
@@ -114,16 +114,21 @@ const posts = (
                                             },
                                         )}
                                         {post.data.pubDate.toLocaleTimeString(
-                                            "en-us",
+                                            "en-gb",
+                                            {
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                            },
                                         )}
                                     </span>
-                                    <Show when={!!post.data.icon}>
+                                    <Show
+                                        when={
+                                            isLucidIcon(post.data.icon) &&
+                                            post.data.icon
+                                        }
+                                    >
                                         {(icon) => (
-                                            //@ts-ignore
-                                            <Icon
-                                                name={post.data.icon}
-                                                size={16}
-                                            />
+                                            <Icon name={icon()} size={16} />
                                         )}
                                     </Show>
                                     <span class="flex-1 text-(--color-fg1)">

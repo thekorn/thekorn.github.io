@@ -18,27 +18,59 @@
       "recommended": true
     }
   },
+  "overrides": [
+    {
+      "includes": ["**/*.astro"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedImports": "off",
+            "noUnusedVariables": "off"
+          }
+        }
+      }
+    }
+  ],
   "javascript": {
     "formatter": {
-      "quoteStyle": "single"
+      "quoteStyle": "double"
     }
   },
   "assist": {
     "enabled": true,
     "actions": {
       "source": {
-        "organizeImports": "on"
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              ["astro:*", "*astro-*", "astro*/*"],
+              ":PACKAGE:",
+              ["~/constants"],
+              ":ALIAS:",
+              "**"
+            ]
+          }
+        }
       }
     }
   },
   "css": {
     "parser": {
       "tailwindDirectives": true
+    },
+    "formatter": {
+      "indentWidth": 4,
+      "indentStyle": "space"
     }
   },
   "html": {
     "experimentalFullSupportEnabled": true,
     "formatter": {
+      "whitespaceSensitivity": "ignore",
+      "indentWidth": 4,
+      "enabled": true,
+      "selfCloseVoidElements": "always",
       "indentScriptAndStyle": false
     }
   }

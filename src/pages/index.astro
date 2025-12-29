@@ -1,6 +1,4 @@
 ---
-// biome-ignore-all lint/correctness/noUnusedVariables: reason
-
 import { getCollection } from "astro:content";
 import Github from "lucide-solid/icons/github";
 import Linkedin from "lucide-solid/icons/linkedin";
@@ -29,14 +27,14 @@ const posts = (
             <span class="w-3 h-3 rounded-full bg-[#cc241d]"></span>
             <span class="w-3 h-3 rounded-full bg-[#d79921]"></span>
             <span class="w-3 h-3 rounded-full bg-[#98971a]"></span>
-            <span class="ml-auto text-xs text-(--color-fg-dim)"
-                >thekorn.dev: ~</span
-            >
+            <span class="ml-auto text-xs text-(--color-fg-dim)">
+                thekorn.dev: ~
+            </span>
         </div>
         <div class="p-6">
             <header class="mb-10">
                 <p class="mb-2 text-(--color-accent)">
-                    <span class="text-(--color-accent-purple)">$</span> whoami
+                    <span class="text-(--color-accent-purple)">$</span>whoami
                 </p>
                 <h1 class="text-3xl font-bold text-(--color-fg0)">thekorn</h1>
                 <p class="mt-2 text-lg text-(--color-fg-dim)">
@@ -46,7 +44,8 @@ const posts = (
 
             <section class="mb-10">
                 <p class="mb-2 text-(--color-accent)">
-                    <span class="text-(--color-accent-purple)">$</span> cat about.txt
+                    <span class="text-(--color-accent-purple)">$</span>cat
+                    about.txt
                 </p>
                 <p class="text-lg leading-relaxed text-(--color-fg) mb-6">
                     Welcome to my personal website. I'm a software engineer and
@@ -77,21 +76,21 @@ const posts = (
                         class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-bg-dim) border border-(--color-border) rounded text-sm text-(--color-fg) no-underline transition-all duration-150 hover:border-(--color-accent-purple) hover:text-(--color-accent-purple)"
                     >
                         <Mail class="w-4 h-4" />
-                        <span class="text-(--color-fg-dim)"
-                            >hello@thekorn.dev</span
-                        >
+                        <span class="text-(--color-fg-dim)">
+                            hello@thekorn.dev
+                        </span>
                     </a>
                 </div>
             </section>
 
             <section>
                 <p class="mb-4 text-(--color-accent)">
-                    <span class="text-(--color-accent-purple)">$</span> alias ll="eza
-                    --icons --long --no-permissions --no-filesize --no-permissions
-                    --no-git"
+                    <span class="text-(--color-accent-purple)">$</span>alias
+                    ll="eza --icons --long --no-permissions --no-filesize
+                    --no-permissions --no-git"
                 </p>
                 <p class="mb-4 text-(--color-accent)">
-                    <span class="text-(--color-accent-purple)">$</span> ll ./blog
+                    <span class="text-(--color-accent-purple)">$</span>ll ./blog
                 </p>
                 <ul class="list-none p-0">
                     {

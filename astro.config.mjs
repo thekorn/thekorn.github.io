@@ -8,8 +8,7 @@ import mdx from "@astrojs/mdx";
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.thekorn.dev",
-  integrations: [solidJs(), sitemap(), mdx()],
-
+  integrations: [solidJs(), sitemap({filter: (page) => !page.includes("/challenges/")}), mdx()],
   vite: {
     plugins: [tailwindcss()],
   },

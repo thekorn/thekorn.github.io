@@ -9,7 +9,7 @@
     "astro": "astro",
     "check": "prettier --write .",
     "typecheck": "tsgo --noEmit",
-    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.astro",
+    "lint": "eslint .",
     "test": "pnpm check && pnpm typecheck && pnpm lint"
   },
   "dependencies": {

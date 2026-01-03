@@ -1,0 +1,54 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "thekorn.dev | Oops...";
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title={title}>
+    <div
+        class="bg-(--color-bg-dim) border border-(--color-border) rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
+    >
+        <div
+            class="bg-(--color-bg-dimmer) px-4 py-2.5 flex items-center gap-2 border-b border-(--color-border)"
+        >
+            <span class="w-3 h-3 rounded-full bg-[#cc241d]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#d79921]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#98971a]"></span>
+            <span class="ml-auto text-xs text-(--color-fg-dim)">
+                thekorn.dev: ~/404.html
+            </span>
+        </div>
+        <div class="p-6">
+            <header class="mb-10">
+                <p class="mb-2 text-(--color-accent)">
+                    <span class="text-(--color-accent-purple)">$</span>echo $?
+                </p>
+                <h1 class="text-3xl font-bold text-(--color-fg0)">
+                    404 - Page Not Found
+                </h1>
+            </header>
+
+            <section class="mb-10">
+                <p class="mb-2 text-(--color-accent)">
+                    <span class="text-(--color-accent-purple)">$</span>curl
+                    {currentPath}
+                </p>
+                <p class="text-lg leading-relaxed text-(--color-fg) mb-6">
+                    <span>&gt;</span> 404 Not Found<br /> exit code: 1 <br
+                    />reason: skill issue
+                </p>
+            </section>
+
+            <div class="mt-10 pt-6 border-t border-(--color-border)">
+                <a
+                    href="/"
+                    class="inline-flex items-center gap-2 text-sm text-(--color-fg-dim) no-underline transition-all duration-150 hover:text-(--color-accent-yellow)"
+                >
+                    <span class="text-(--color-accent-purple)">&#8592;</span>cd
+                    ~
+                </a>
+            </div>
+        </div>
+    </div>
+</Layout>

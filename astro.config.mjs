@@ -11,7 +11,7 @@ export default defineConfig({
   integrations: [
     solidJs(),
     sitemap({
-      filter: (page) => !URL.parse(page).pathname.startsWith("/challenges/"),
+      filter: (page) => !URL.parse(page)?.pathname.startsWith("/challenges/"),
     }),
     mdx(),
   ],

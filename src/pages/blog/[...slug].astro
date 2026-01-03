@@ -1,102 +1,97 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
-import { blogWebsite, getArticleSchema } from "@utils/structuredData";
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import { blogWebsite, getArticleSchema } from '@utils/structuredData';
 
-type Props = CollectionEntry<"blog">;
+type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 
 const articleStructuredData = getArticleSchema(post);
 
 const breadcrumbsStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-        {
-            "@type": "ListItem",
-            position: 1,
-            name: "Blog",
-            item: `${import.meta.env.SITE}/`,
-        },
-        {
-            "@type": "ListItem",
-            position: 2,
-            name: post.data.title,
-            item: `${import.meta.env.SITE}/blog/${post.slug}/`,
-        },
-    ],
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Blog',
+      item: `${import.meta.env.SITE}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: post.data.title,
+      item: `${import.meta.env.SITE}/blog/${post.slug}/`,
+    },
+  ],
 };
 
 const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [articleStructuredData, breadcrumbsStructuredData, blogWebsite],
+  '@context': 'https://schema.org',
+  '@graph': [articleStructuredData, breadcrumbsStructuredData, blogWebsite],
 };
 
 export async function getStaticPaths() {
-    const posts = await getCollection("blog", ({ data }) => {
-        if (import.meta.env.PROD) {
-            return !data.draft;
-        }
-        return true;
-    });
-    return posts.map((post) => ({
-        params: { slug: post.slug },
-        props: post,
-    }));
+  const posts = await getCollection('blog', ({ data }) => {
+    if (import.meta.env.PROD) {
+      return !data.draft;
+    }
+    return true;
+  });
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
 }
 const { Content } = await post.render();
 ---
 
 <Layout title={`${post.data.title} | thekorn.dev`}>
-    <script
-        is:inline
-        type="application/ld+json"
-        set:html={JSON.stringify(jsonLd)}
-    />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <div
+    class="bg-(--color-bg-dim) border border-(--color-border) rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
+  >
     <div
-        class="bg-(--color-bg-dim) border border-(--color-border) rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
+      class="bg-(--color-bg-dimmer) px-4 py-2.5 flex items-center gap-2 border-b border-(--color-border)"
     >
-        <div
-            class="bg-(--color-bg-dimmer) px-4 py-2.5 flex items-center gap-2 border-b border-(--color-border)"
-        >
-            <span class="w-3 h-3 rounded-full bg-[#cc241d]"></span>
-            <span class="w-3 h-3 rounded-full bg-[#d79921]"></span>
-            <span class="w-3 h-3 rounded-full bg-[#98971a]"></span>
-            <span class="ml-auto text-xs text-(--color-fg-dim)">
-                thekorn.dev: ~/blog/{post.slug}
-            </span>
-        </div>
-        <div class="p-6">
-            <article class="prose">
-                <header class="mb-8">
-                    <h1
-                        class="text-2xl font-bold text-(--color-fg0) m-0 before:content-['$'] before:text-(--color-accent)"
-                    >
-                        {post.data.title}
-                    </h1>
-                    <time class="text-sm text-(--color-fg-dim)">
-                        Last commit:
-                        {
-                            post.data.pubDate.toLocaleDateString("en-us", {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                            })
-                        }
-                    </time>
-                </header>
-                <Content />
-            </article>
-            <div class="mt-10 pt-6 border-t border-(--color-border)">
-                <a
-                    href="/"
-                    class="inline-flex items-center gap-2 text-sm text-(--color-fg-dim) no-underline transition-all duration-150 hover:text-(--color-accent-yellow)"
-                >
-                    <span class="text-(--color-accent-purple)">&#8592;</span>cd
-                    ~
-                </a>
-            </div>
-        </div>
+      <span class="w-3 h-3 rounded-full bg-[#cc241d]"></span>
+      <span class="w-3 h-3 rounded-full bg-[#d79921]"></span>
+      <span class="w-3 h-3 rounded-full bg-[#98971a]"></span>
+      <span class="ml-auto text-xs text-(--color-fg-dim)">
+        thekorn.dev: ~/blog/{post.slug}
+      </span>
     </div>
+    <div class="p-6">
+      <article class="prose">
+        <header class="mb-8">
+          <h1
+            class="text-2xl font-bold text-(--color-fg0) m-0 before:content-['$'] before:text-(--color-accent)"
+          >
+            {post.data.title}
+          </h1>
+          <time class="text-sm text-(--color-fg-dim)">
+            Last commit:
+            {
+              post.data.pubDate.toLocaleDateString('en-us', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })
+            }
+          </time>
+        </header>
+        <Content />
+      </article>
+      <div class="mt-10 pt-6 border-t border-(--color-border)">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 text-sm text-(--color-fg-dim) no-underline transition-all duration-150 hover:text-(--color-accent-yellow)"
+        >
+          <span class="text-(--color-accent-purple)">&#8592;</span>cd ~
+        </a>
+      </div>
+    </div>
+  </div>
 </Layout>

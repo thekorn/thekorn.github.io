@@ -26,13 +26,7 @@
         "source.fixAll.biome": true,
         "source.organizeImports.biome": true
       },
-      "language_servers": [
-        "!eslint",
-        "!vtsls",
-        "tsgo",
-        "tailwindcss-language-server",
-        "biome"
-      ]
+      "language_servers": ["!eslint", "!vtsls", "tsgo", "tailwindcss-language-server", "biome"]
     },
     "JSON": { "formatter": { "language_server": { "name": "biome" } } },
     "JSONC": { "formatter": { "language_server": { "name": "biome" } } },

@@ -1,40 +1,34 @@
 ---
-import "./style.css";
+import './style.css';
 ---
 
 <style>
-:root {
+  :root {
     --yellow: #f6df96;
     --bg: #6cb3a9;
     --dark-red: #781728;
     --red: #d25b70;
-}
+  }
 </style>
-<div
+<div class:list={['h-100 aspect-square bg-(--bg)', 'flex justify-center items-center']}>
+  <div
     class:list={[
-        "h-100 aspect-square bg-(--bg)",
-        "flex justify-center items-center",
+      'h-80 aspect-square rounded-full',
+      'flex justify-center items-center',
+      'bg-linear-[180deg,var(--red)_150px,var(--dark-red)_150px,var(--dark-red)_170px,white_170px]',
     ]}
->
+  >
     <div
-        class:list={[
-            "h-80 aspect-square rounded-full",
-            "flex justify-center items-center",
-            "bg-linear-[180deg,var(--red)_150px,var(--dark-red)_150px,var(--dark-red)_170px,white_170px]",
-        ]}
+      class:list={['h-20 aspect-square bg-(--yellow) rounded-full border-10 border-(--dark-red)']}
     >
-        <div
-            class:list={[
-                "h-20 aspect-square bg-(--yellow) rounded-full border-10 border-(--dark-red)",
-            ]}
-        >
-            <div
-                class:list={[
-                    "h-5 w-[320px] left-10 top-47.5",
-                    "absolute",
-                    "bg-linear-[90deg,var(--bg)_10px,#00000000_10px,#00000000_310px,var(--bg)_310px]",
-                ]}
-            ></div>
-        </div>
+      <div
+        class:list={[
+          'h-5 w-[320px] left-10 top-47.5',
+          'absolute',
+          'bg-linear-[90deg,var(--bg)_10px,#00000000_10px,#00000000_310px,var(--bg)_310px]',
+        ]}
+      >
+      </div>
     </div>
+  </div>
 </div>

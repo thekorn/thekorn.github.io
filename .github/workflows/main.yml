@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
   # Run the workflow once per day at midnight UTC
   schedule:
-    - cron: "0 0 * * *"
+    - cron: '0 0 * * *'
 
 # Allow this job to clone the repo and create a page deployment
 permissions:

@@ -1,6 +1,37 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import { blogWebsite, getArticleSchema } from "../../utils/structuredData";
+
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+
+const articleStructuredData = getArticleSchema(post);
+
+const breadcrumbsStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        {
+            "@type": "ListItem",
+            position: 1,
+            name: "Blog",
+            item: `${import.meta.env.SITE}/`,
+        },
+        {
+            "@type": "ListItem",
+            position: 2,
+            name: post.data.title,
+            item: `${import.meta.env.SITE}/blog/${post.slug}/`,
+        },
+    ],
+};
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [articleStructuredData, breadcrumbsStructuredData, blogWebsite],
+};
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog", ({ data }) => {
@@ -14,14 +45,15 @@ export async function getStaticPaths() {
         props: post,
     }));
 }
-
-type Props = CollectionEntry<"blog">;
-
-const post = Astro.props;
 const { Content } = await post.render();
 ---
 
 <Layout title={`${post.data.title} | thekorn.dev`}>
+    <script
+        is:inline
+        type="application/ld+json"
+        set:html={JSON.stringify(jsonLd)}
+    />
     <div
         class="bg-(--color-bg-dim) border border-(--color-border) rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
     >

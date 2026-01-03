@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.6",
     "lucide-solid": "^0.562.0",
+    "schema-dts": "^1.1.5",
     "solid-js": "^1.9.10",
     "tailwindcss": "^4.1.18"
   },

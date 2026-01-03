@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Icon, { isLucidIcon } from '@components/Icon';
+import Icon from '@components/Icon';
 import Layout from '@layouts/Layout.astro';
 import { mainWebsite, personSchema } from '@utils/structuredData';
 import Github from 'lucide-solid/icons/github';
@@ -111,7 +111,7 @@ const posts = (
                     })}
                   </span>
                   <Show when={post.data.icon}>
-                    {/* @ts-ignore */}
+                    {/* @ts-expect-error fixme */}
                     <Icon name={post.data.icon} size={16} />
                   </Show>
                   <span class="flex-1 text-(--color-fg1)">{post.data.title}</span>

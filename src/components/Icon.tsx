@@ -2,11 +2,13 @@ import { icons, type LucideProps } from 'lucide-solid';
 import { splitProps } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 
+export type LucidIconNames = keyof typeof icons;
+
 interface IconProps extends LucideProps {
-  name: keyof typeof icons;
+  name: LucidIconNames;
 }
 
-export const isLucidIcon = (name: string): name is keyof typeof icons => name in icons;
+export const isLucidIcon = (name: string): name is LucidIconNames => name in icons;
 
 const Icon = (props: IconProps) => {
   const [local, others] = splitProps(props, ['name']);

@@ -8,7 +8,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "prettier --write .",
-    "typecheck": "tsgo --noEmit"
+    "typecheck": "tsgo --noEmit",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.astro",
+    "test": "pnpm check && pnpm typecheck && pnpm lint"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -22,11 +24,14 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.10",
+    "@eslint/js": "^9.39.2",
     "@tailwindcss/typography": "^0.5.19",
     "@typescript/native-preview": "7.0.0-dev.20260102.1",
+    "eslint": "^9.39.2",
+    "eslint-plugin-astro": "^1.5.0",
     "prettier": "^3.7.4",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript-eslint": "^8.51.0"
   },
   "pnpm": {
     "overrides": {

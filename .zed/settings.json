@@ -5,37 +5,24 @@
   "format_on_save": "on",
   "languages": {
     "JavaScript": {
-      "formatter": { "language_server": { "name": "biome" } },
       "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      },
-      "language_servers": ["!vtsls", "tsgo"]
+        "source.fixAll.eslint": true
+      }
     },
     "TypeScript": {
-      "formatter": { "language_server": { "name": "biome" } },
       "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
+        "source.fixAll.eslint": true
       },
       "language_servers": ["!vtsls", "tsgo"]
     },
     "TSX": {
-      "formatter": { "language_server": { "name": "biome" } },
       "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
+        "source.fixAll.eslint": true
       },
-      "language_servers": ["!eslint", "!vtsls", "tsgo", "tailwindcss-language-server", "biome"]
-    },
-    "JSON": { "formatter": { "language_server": { "name": "biome" } } },
-    "JSONC": { "formatter": { "language_server": { "name": "biome" } } },
-    "CSS": {
-      "language_servers": ["!unocss-language-server", "!css", "biome"]
+      "language_servers": ["eslint", "!vtsls", "tsgo", "tailwindcss-language-server"]
     }
   },
   "auto_install_extensions": {
-    "biome": true,
     "emmet": true,
     "tsgo": true
   },

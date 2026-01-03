@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import CTAButton from '@components/CTAButton';
 import Icon from '@components/Icon';
 import Layout from '@layouts/Layout.astro';
 import { mainWebsite, personSchema } from '@utils/structuredData';
@@ -54,31 +55,15 @@ const posts = (
           web and I write about software development, programming, and technology.
         </p>
         <div class="flex flex-wrap gap-3">
-          <a
-            href="https://github.com/thekorn"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-bg-dim) border border-(--color-border) rounded text-sm text-(--color-fg) no-underline transition-all duration-150 hover:border-(--color-accent-blue) hover:text-(--color-accent-blue)"
-          >
-            <Github class="w-4 h-4" />
-            <span class="text-(--color-fg-dim)">thekorn</span>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/markuskorn/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-bg-dim) border border-(--color-border) rounded text-sm text-(--color-fg) no-underline transition-all duration-150 hover:border-(--color-accent-blue) hover:text-(--color-accent-blue)"
-          >
-            <Linkedin class="w-4 h-4" />
-            <span class="text-(--color-fg-dim)">markuskorn</span>
-          </a>
-          <a
-            href="mailto:hello@thekorn.dev"
-            class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-bg-dim) border border-(--color-border) rounded text-sm text-(--color-fg) no-underline transition-all duration-150 hover:border-(--color-accent-purple) hover:text-(--color-accent-purple)"
-          >
-            <Mail class="w-4 h-4" />
-            <span class="text-(--color-fg-dim)"> hello@thekorn.dev </span>
-          </a>
+          <CTAButton href="https://github.com/thekorn" icon={Github} target="_blank" rel="noopener noreferrer">
+            thekorn
+          </CTAButton>
+          <CTAButton href="https://www.linkedin.com/in/markuskorn/" icon={Linkedin} target="_blank" rel="noopener noreferrer">
+            markuskorn
+          </CTAButton>
+          <CTAButton href="mailto:hello@thekorn.dev" icon={Mail} hoverColor="purple">
+            hello@thekorn.dev
+          </CTAButton>
         </div>
       </section>
 

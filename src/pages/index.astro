@@ -7,7 +7,8 @@ import { mainWebsite, personSchema } from '@utils/structuredData';
 import Github from 'lucide-solid/icons/github';
 import Linkedin from 'lucide-solid/icons/linkedin';
 import Mail from 'lucide-solid/icons/mail';
-import Shell from '@components/Shell';
+import LayoutShell from '@components/LayoutShell';
+import ShellLine from '@components/ShellLine';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -26,20 +27,16 @@ const posts = (
 
 <Layout title="thekorn.dev">
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  <Shell path="~">
+  <LayoutShell path="~">
     <div class="p-6">
       <header class="mb-10">
-        <p class="mb-2 text-(--color-accent)">
-          <span class="text-(--color-accent-purple)">$</span>whoami
-        </p>
+        <ShellLine>whoami</ShellLine>
         <h1 class="text-3xl font-bold text-(--color-fg0)">thekorn</h1>
         <p class="mt-2 text-lg text-(--color-fg-dim)">Software engineer, developer, creator</p>
       </header>
 
       <section class="mb-10">
-        <p class="mb-2 text-(--color-accent)">
-          <span class="text-(--color-accent-purple)">$</span>cat about.txt
-        </p>
+        <ShellLine>cat about.txt</ShellLine>
         <p class="text-lg leading-relaxed text-(--color-fg) mb-6">
           Welcome to my personal website. I'm a software engineer and I love building things for the
           web and I write about software development, programming, and technology.
@@ -68,13 +65,10 @@ const posts = (
       </section>
 
       <section>
-        <p class="mb-4 text-(--color-accent)">
-          <span class="text-(--color-accent-purple)">$</span>alias ll="eza --icons --long
-          --no-permissions --no-filesize --no-permissions --no-git"
-        </p>
-        <p class="mb-4 text-(--color-accent)">
-          <span class="text-(--color-accent-purple)">$</span>ll ./blog
-        </p>
+        <ShellLine
+          >alias ll="eza --icons --long --no-permissions --no-filesize --no-permissions --no-git"
+        </ShellLine>
+        <ShellLine>ll ./blog</ShellLine>
         <ul class="list-none p-0">
           {posts.map((post) => <PostItem post={post} />)}
         </ul>
@@ -86,5 +80,5 @@ const posts = (
         </p>
       </div>
     </div>
-  </Shell>
+  </LayoutShell>
 </Layout>

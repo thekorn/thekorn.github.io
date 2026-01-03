@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import { blogWebsite, getArticleSchema } from '@utils/structuredData';
-import Shell from '@components/Shell';
+import LayoutShell from '@components/LayoutShell';
 
 type Props = CollectionEntry<'blog'>;
 
@@ -51,7 +51,7 @@ const { Content } = await post.render();
 
 <Layout title={`${post.data.title} | thekorn.dev`}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  <Shell path={`~/blog/${post.slug}`}>
+  <LayoutShell path={`~/blog/${post.slug}`}>
     <div class="p-6">
       <article class="prose">
         <header class="mb-8">
@@ -82,5 +82,5 @@ const { Content } = await post.render();
         </a>
       </div>
     </div>
-  </Shell>
+  </LayoutShell>
 </Layout>

@@ -1,6 +1,6 @@
 import type { ParentComponent } from 'solid-js';
 
-const Shell: ParentComponent<{ path: string }> = ({ path, children }) => {
+const LayoutShell: ParentComponent<{ path: string }> = ({ path, children }) => {
   return (
     <div class="bg-(--color-bg-dim) border border-(--color-border) rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
       <div class="bg-(--color-bg-dimmer) px-4 py-2.5 flex items-center gap-2 border-b border-(--color-border)">
@@ -14,4 +14,4 @@ const Shell: ParentComponent<{ path: string }> = ({ path, children }) => {
   );
 };
 
-export default Shell;
+export default LayoutShell;

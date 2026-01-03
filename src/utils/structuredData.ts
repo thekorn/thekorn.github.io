@@ -1,6 +1,5 @@
 import type { CollectionEntry } from "astro:content";
 import type { Article, Person, WebSite, WithContext } from "schema-dts";
-import avatar from "../../public/thekorn.png";
 
 export const blogWebsite: WithContext<WebSite> = {
   "@context": "https://schema.org",
@@ -25,7 +24,7 @@ export const personSchema: WithContext<Person> = {
   "@type": "Person",
   name: "Markus Korn",
   url: "https://www.thekorn.dev",
-  image: `${import.meta.env.SITE}${avatar.src}`,
+  image: `${import.meta.env.SITE}/thekorn.png`,
   sameAs: [
     "https://github.com/thekorn",
     "https://www.linkedin.com/in/markuskorn/",
@@ -55,13 +54,13 @@ export function getArticleSchema(post: CollectionEntry<"blog">) {
       "@type": "Person",
       name: "Markus Korn",
       url: import.meta.env.SITE,
-      image: import.meta.env.SITE + avatar.src,
+      image: `${import.meta.env.SITE}/thekorn.png`,
     },
     author: {
       "@type": "Person",
       name: "Markus Korn",
       url: import.meta.env.SITE,
-      image: import.meta.env.SITE + avatar.src,
+      image: `${import.meta.env.SITE}/thekorn.png`,
     },
   };
   return articleStructuredData;

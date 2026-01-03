@@ -1,12 +1,12 @@
 ---
 import { getCollection } from "astro:content";
+import Icon, { isLucidIcon } from "@components/Icon";
+import Layout from "@layouts/Layout.astro";
+import { mainWebsite, personSchema } from "@utils/structuredData";
 import Github from "lucide-solid/icons/github";
 import Linkedin from "lucide-solid/icons/linkedin";
 import Mail from "lucide-solid/icons/mail";
 import { Show } from "solid-js/web";
-import Icon, { isLucidIcon } from "@/components/Icon";
-import Layout from "@/layouts/Layout.astro";
-import { mainWebsite, personSchema } from "@/utils/structuredData";
 
 const jsonLd = {
     "@context": "https://schema.org",

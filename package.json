@@ -10,7 +10,8 @@
     "check": "prettier --write .",
     "typecheck": "tsgo --noEmit",
     "lint": "eslint .",
-    "test": "pnpm check && pnpm typecheck && pnpm lint"
+    "stylelint": "stylelint **/*.css",
+    "test": "pnpm check && pnpm typecheck && pnpm lint && pnpm stylelint"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -31,6 +32,9 @@
     "eslint-plugin-astro": "^1.5.0",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
+    "stylelint": "^16.26.1",
+    "stylelint-config-standard": "^39.0.1",
+    "stylelint-config-tailwindcss": "^1.0.0",
     "typescript-eslint": "^8.51.0"
   },
   "pnpm": {

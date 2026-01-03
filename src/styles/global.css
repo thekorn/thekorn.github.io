@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+
 @plugin "@tailwindcss/typography";
 
 @theme {
@@ -18,7 +19,6 @@
   --color-gruvbox-aqua: #8ec07c;
   --color-gruvbox-orange: #fe8019;
   --color-gruvbox-gray: #928374;
-
   --font-mono:
     'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'SF Mono', 'Menlo', 'Monaco', 'Consolas',
     monospace;

@@ -1,0 +1,28 @@
+---
+import './style.css';
+---
+
+<style>
+  :root {
+    --bg: #f3ead2;
+    --dark: #38483c;
+    --red: #c36768;
+  }
+</style>
+<div class="h-100 aspect-square bg-(--bg) relative">
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div
+      class="h-10 w-80 bg-linear-[90deg,var(--dark)_40px,var(--red)_40px,var(--red)_280px,var(--dark)_280px]"
+    >
+    </div>
+  </div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div
+      class="h-10 w-80 bg-linear-[90deg,var(--dark)_40px,var(--red)_40px,var(--red)_280px,var(--dark)_20px] rotate-90"
+    >
+    </div>
+  </div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="h-14 aspect-square bg-(--dark)"></div>
+  </div>
+</div>

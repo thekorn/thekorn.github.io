@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import solidJs from '@astrojs/solid-js';
 import tailwindcss from '@tailwindcss/vite';
+import rehypeShiki from '@shikijs/rehype';
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,6 +20,15 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   markdown: {
+    rehypePlugins: [
+      [
+        rehypeShiki,
+        {
+          inline: 'tailing-curly-colon',
+          theme: 'one-dark-pro',
+        },
+      ],
+    ],
     shikiConfig: {
       theme: 'gruvbox-dark-hard',
     },

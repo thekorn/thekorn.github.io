@@ -19,6 +19,21 @@
   --color-gruvbox-aqua: #8ec07c;
   --color-gruvbox-orange: #fe8019;
   --color-gruvbox-gray: #928374;
+  --color-gruvbox-light-bg0: #fbf1c7;
+  --color-gruvbox-light-bg1: #f9e8c6;
+  --color-gruvbox-light-bg2: #f3dfa8;
+  --color-gruvbox-light-bg3: #d5c4a1;
+  --color-gruvbox-light-fg0: #282828;
+  --color-gruvbox-light-fg1: #3c3836;
+  --color-gruvbox-light-fg2: #504945;
+  --color-gruvbox-light-fg3: #928374;
+  --color-gruvbox-light-red: #cc2412;
+  --color-gruvbox-light-green: #98971a;
+  --color-gruvbox-light-yellow: #d79921;
+  --color-gruvbox-light-blue: #458588;
+  --color-gruvbox-light-purple: #b16286;
+  --color-gruvbox-light-aqua: #689d6a;
+  --color-gruvbox-light-orange: #af3a03;
   --font-mono:
     'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'SF Mono', 'Menlo', 'Monaco', 'Consolas',
     monospace;
@@ -29,6 +44,7 @@
   --color-bg-dim: var(--color-gruvbox-bg1);
   --color-bg-dimmer: var(--color-gruvbox-bg2);
   --color-fg: var(--color-gruvbox-fg1);
+  --color-fg0: var(--color-gruvbox-fg0);
   --color-fg-dim: var(--color-gruvbox-fg3);
   --color-accent: var(--color-gruvbox-green);
   --color-accent-alt: var(--color-gruvbox-yellow);
@@ -36,6 +52,21 @@
   --color-accent-red: var(--color-gruvbox-red);
   --color-accent-blue: var(--color-gruvbox-blue);
   --color-border: var(--color-gruvbox-bg3);
+}
+
+[data-theme='light'] {
+  --color-bg: var(--color-gruvbox-light-bg0);
+  --color-bg-dim: var(--color-gruvbox-light-bg1);
+  --color-bg-dimmer: var(--color-gruvbox-light-bg2);
+  --color-fg: var(--color-gruvbox-light-fg1);
+  --color-fg0: var(--color-gruvbox-light-fg0);
+  --color-fg-dim: var(--color-gruvbox-light-fg3);
+  --color-accent: var(--color-gruvbox-light-green);
+  --color-accent-alt: var(--color-gruvbox-light-yellow);
+  --color-accent-purple: var(--color-gruvbox-light-purple);
+  --color-accent-red: var(--color-gruvbox-light-red);
+  --color-accent-blue: var(--color-gruvbox-light-blue);
+  --color-border: var(--color-gruvbox-light-bg3);
 }
 
 html {
@@ -49,8 +80,13 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-gruvbox-blue);
-  color: var(--color-gruvbox-bg0);
+  background-color: var(--color-accent-blue);
+  color: var(--color-bg);
+}
+
+[data-theme='light'] ::selection {
+  background-color: var(--color-accent-blue);
+  color: var(--color-gruvbox-light-bg0);
 }
 
 a {
@@ -101,6 +137,10 @@ kbd {
 }
 
 .prose strong {
+  color: var(--color-accent-yellow);
+}
+
+[data-theme='light'] .prose strong {
   color: var(--color-accent-yellow);
 }
 

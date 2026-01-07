@@ -1,4 +1,5 @@
 import type { ParentComponent } from 'solid-js';
+import ThemeToggle from './ThemeToggle';
 
 const LayoutShell: ParentComponent<{ path: string }> = ({ path, children }) => {
   return (
@@ -7,7 +8,10 @@ const LayoutShell: ParentComponent<{ path: string }> = ({ path, children }) => {
         <span class="w-3 h-3 rounded-full bg-[#cc241d]"></span>
         <span class="w-3 h-3 rounded-full bg-[#d79921]"></span>
         <span class="w-3 h-3 rounded-full bg-[#98971a]"></span>
-        <span class="ml-auto text-xs text-(--color-fg-dim)">thekorn.dev: {path}</span>
+        <span class="ml-auto flex items-center gap-3 text-xs text-(--color-fg-dim)">
+          <ThemeToggle client:load />
+          <span>thekorn.dev: {path}</span>
+        </span>
       </div>
       {children}
     </div>

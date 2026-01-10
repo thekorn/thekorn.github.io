@@ -1,0 +1,200 @@
+---
+title: "Building a Workflow Editor with SolidJS"
+description: "exploring visual workflow editing with solidjs and typescript"
+pubDate: "2026-01-10 20:00:00"
+icon: "GitBranch"
+draft: false
+---
+
+## The Idea
+
+I've been fascinated by visual workflow editors for a while. You know the kind - drag nodes onto a canvas, connect them with edges, build complex pipelines without writing a single line of code. Tools like n8n, Zapier, or even GitHub Actions visual editors come to mind.
+
+So I decided to build one myself. Not because the world needs another workflow editor, but because I wanted to understand how they work under the hood. There's something deeply satisfying about taking a complex UI pattern and breaking it down into manageable pieces.
+
+## Tech Stack
+
+After some consideration, I went with:
+
+- **SolidJS** - for reactive, performant UI components
+- **TypeScript** - strict mode, because I learned to love types
+- **Tailwind CSS v4** - utility-first styling
+- **Vite** - fast builds
+- **Biome** - linting and formatting
+
+![Workflow Editor Screenshot](/images/workflow-editor-sample.png)
+
+The editor features drag-and-drop nodes, multiple node shapes, edge connections, and pan/zoom functionality. The sidebar on the right handles node selection and property editing, while the devtools overlay (bottom left) exposes the internal state for debugging.
+
+## Core Architecture
+
+The editor is built around a few key concepts. Here's the actual type definitions from the codebase:
+
+```typescript
+// src/types.ts
+
+/** Represents a node in the workflow graph. */
+export type Node = {
+  id: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  shape: NodeShape;
+  title: string;
+};
+
+export type NodeShape = 'rectangle' | 'diamond' | 'pill' | 'ellipse';
+
+/** Represents a connection between two nodes. */
+export type Edge = {
+  id: string;
+  from: string;
+  to: string;
+  fromSide: Side;
+  toSide: Side;
+};
+
+export type Side = 'left' | 'right' | 'top' | 'bottom';
+
+/** The complete workflow data structure. */
+export type Workflow = {
+  nodes: Record<string, Node>;
+  edges: Record<string, Edge>;
+};
+
+/** Union type for the current drag operation. */
+export type Drag = 
+  | { type: 'node'; id: string; posRelToNode: Vec }
+  | { type: 'edge'; fromNodeId: string; fromSide: Side; posRelToGrid: Vec }
+  | { type: 'grid'; startPos: Vec; startTranslation: Vec };
+
+export type Vec = { x: number; y: number };
+
+/** Currently selected item in the editor. */
+export type Selection = { type: 'node' | 'edge'; id: string };
+```
+
+A few design decisions worth noting:
+
+1. **Maps over arrays** - `nodes` and `edges` are `Record<string, Node>` instead of `Node[]`. This makes lookups by ID O(1) and keeps state updates simple with Solid's store.
+
+2. **Explicit side type** - Edges know which side of the node they connect to (`fromSide`, `toSide`). This simplifies edge rendering since we know exactly where to draw the bezier curve.
+
+3. **Drag as a discriminated union** - The `Drag` type cleanly represents three different scenarios (dragging a node, creating an edge, panning the canvas) with type guards for safe access.
+
+The entire application state lives in a SolidJS store. This makes it trivial to derive computed values and keeps the data flow predictable.
+
+## The Editor Component
+
+The main `WorkflowEditor` component ties everything together. It uses three contexts to manage state:
+
+```tsx
+// src/components/editor/WorkflowEditor.tsx
+const WorkflowEditor: Component<{ nodeTemplates: NodeTemplate[]; Icon: Component<IconProps> }> = ({ nodeTemplates, Icon }) => {
+  const { workflow, setWorkflow } = useWorkflowContext();
+  const { drag, setDrag } = useDragContext();
+  const { selection, setSelection } = useSelectionContext();
+  const [translation, setTranslation] = createSignal<Vec>({ x: 0, y: 0 });
+
+  return (
+    <div data-grid on:mousedown={onMouseDown} on:mouseup={onMouseUp} on:mousemove={onMouseMove} ...>
+      <TemplateToolbar nodeTemplates={nodeTemplates} Icon={Icon} />
+      <Show when={selection()}><SelectionSidebar /></Show>
+      <div style={{ translate: `${translation().x}px ${translation().y}px` }}>
+        <NodesUI />
+        <EdgesUI />
+      </div>
+    </div>
+  );
+};
+```
+
+The editor handles three types of interactions:
+
+1. **Node dragging** - Calculate position relative to the node's top-left corner, update workflow state on mouse move
+
+2. **Edge creation** - When dragging from a port, track the source node and side. On mouse up over a valid target port, create a new edge if it doesn't already exist
+
+3. **Grid panning** - Calculate the total mouse movement and update the translation offset
+
+The grid background is rendered with a radial dot pattern using Tailwind's arbitrary value syntax:
+
+```tsx
+class="bg-radial-[Circle_at_Center,var(--color-gray-300)_1px,transparent_2px]"
+```
+
+Nodes snap to a 10px grid when dropped, and the background moves with the translation to create the panning effect.
+
+## Nodes and Edges
+
+Nodes are rendered by `NodeUI`, which handles positioning, shape selection, and port placement:
+
+```tsx
+// src/components/nodes/NodeUI.tsx
+const NodeUI: Component<{ node: Node }> = ({ node }) => {
+  const { selection } = useSelectionContext();
+  const isSelected = createMemo(() => selection()?.type === 'node' && selection()?.id === node.id);
+
+  return (
+    <div id={node.id} data-node class="absolute cursor-move ..." style={{
+      left: `${node.x}px`, top: `${node.y}px`,
+      width: `${node.width}px`, height: `${node.height}px`
+    }}>
+      <Dynamic component={shapes[node.shape]} class={isSelected() ? 'stroke-gray-500' : ''} />
+      {node.title}
+      <Port side="left" /><Port side="right" /><Port side="top" /><Port side="bottom" />
+    </div>
+  );
+};
+```
+
+Four shapes are available via a `Dynamic` component: `rectangle`, `diamond`, `ellipse`, and `pill`. Each node has ports on all four sides, which serve as connection points for edges.
+
+Edges are rendered as SVG paths by `EdgeUI`:
+
+```tsx
+// src/components/edges/EdgeUI.tsx
+const EdgeUI: Component<{ id?: string; from: Accessor<Vec>; to: Accessor<Vec>; title?: Accessor<string> }> = ({ id, from, to, title }) => {
+  const pathDef = createMemo(() => `M ${from().x} ${from().y} L ${to().x} ${to().y}`);
+
+  return (
+    <g id={id} data-edge>
+      <path class="stroke-blue-500" d={pathDef()} marker-end="url(#arrowHead)" />
+      <path class="stroke-[25px] stroke-transparent" d={pathDef()} />
+      <Show when={title?.()}>...</Show>
+    </g>
+  );
+};
+```
+
+The edge uses two paths: a thin visible one for the line, and a wide transparent one for easier hit detection when clicking. An SVG marker provides the arrowhead at the target end.
+
+## Real-time Devtools
+
+One feature I'm particularly proud of is the real-time devtools overlay. It shows the current state of the editor - all nodes, edges, selection state - in a collapsible panel.
+
+This was invaluable during development. Instead of guessing why an edge wasn't connecting or why a node wasn't rendering, I could just glance at the devtools and see the raw state.
+
+## Challenges Along the Way
+
+Building this wasn't without hurdles:
+
+1. **Coordinate systems** - Canvas coordinates, screen coordinates, viewport coordinates. Getting this wrong meant nodes jumped around during drag operations.
+
+2. **Selection handling** - Clicking a node selects it. Clicking the canvas deselects. Clicking an edge selects the edge. The order of event handling matters a lot here.
+
+## What's Next
+
+The editor is functional but basic. Future enhancements include:
+
+- Undo/redo stack
+- Node validation (prevent cycles, require connected inputs)
+- Export to JSON for persistence
+- Custom node types via a plugin system
+
+## Reference
+
+This project is heavily inspired by [Sean Shirazi's excellent video series](https://www.youtube.com/watch?v=EpG03RROVfk) on building a similar editor. I highly recommend it if you want to dive deeper into the topic.
+
+The code is available on [GitHub](https://github.com/thekorn/workflow-editor) if you want to play around with it or contribute.

@@ -44,7 +44,7 @@ export type Node = {
   title: string;
 };
 
-export type NodeShape = 'rectangle' | 'diamond' | 'pill' | 'ellipse';
+export type NodeShape = "rectangle" | "diamond" | "pill" | "ellipse";
 
 /** Represents a connection between two nodes. */
 export type Edge = {
@@ -55,7 +55,7 @@ export type Edge = {
   toSide: Side;
 };
 
-export type Side = 'left' | 'right' | 'top' | 'bottom';
+export type Side = "left" | "right" | "top" | "bottom";
 
 /** The complete workflow data structure. */
 export type Workflow = {
@@ -64,15 +64,15 @@ export type Workflow = {
 };
 
 /** Union type for the current drag operation. */
-export type Drag = 
-  | { type: 'node'; id: string; posRelToNode: Vec }
-  | { type: 'edge'; fromNodeId: string; fromSide: Side; posRelToGrid: Vec }
-  | { type: 'grid'; startPos: Vec; startTranslation: Vec };
+export type Drag =
+  | { type: "node"; id: string; posRelToNode: Vec }
+  | { type: "edge"; fromNodeId: string; fromSide: Side; posRelToGrid: Vec }
+  | { type: "grid"; startPos: Vec; startTranslation: Vec };
 
 export type Vec = { x: number; y: number };
 
 /** Currently selected item in the editor. */
-export type Selection = { type: 'node' | 'edge'; id: string };
+export type Selection = { type: "node" | "edge"; id: string };
 ```
 
 A few design decisions worth noting:
@@ -134,16 +134,26 @@ Nodes are rendered by `NodeUI`, which handles positioning, shape selection, and 
 // src/components/nodes/NodeUI.tsx
 const NodeUI: Component<{ node: Node }> = ({ node }) => {
   const { selection } = useSelectionContext();
-  const isSelected = createMemo(() => selection()?.type === 'node' && selection()?.id === node.id);
+  const isSelected = createMemo(() => selection()?.type === "node" && selection()?.id === node.id);
 
   return (
-    <div id={node.id} data-node class="absolute cursor-move ..." style={{
-      left: `${node.x}px`, top: `${node.y}px`,
-      width: `${node.width}px`, height: `${node.height}px`
-    }}>
-      <Dynamic component={shapes[node.shape]} class={isSelected() ? 'stroke-gray-500' : ''} />
+    <div
+      id={node.id}
+      data-node
+      class="absolute cursor-move ..."
+      style={{
+        left: `${node.x}px`,
+        top: `${node.y}px`,
+        width: `${node.width}px`,
+        height: `${node.height}px`,
+      }}
+    >
+      <Dynamic component={shapes[node.shape]} class={isSelected() ? "stroke-gray-500" : ""} />
       {node.title}
-      <Port side="left" /><Port side="right" /><Port side="top" /><Port side="bottom" />
+      <Port side="left" />
+      <Port side="right" />
+      <Port side="top" />
+      <Port side="bottom" />
     </div>
   );
 };
@@ -155,7 +165,12 @@ Edges are rendered as SVG paths by `EdgeUI`:
 
 ```tsx
 // src/components/edges/EdgeUI.tsx
-const EdgeUI: Component<{ id?: string; from: Accessor<Vec>; to: Accessor<Vec>; title?: Accessor<string> }> = ({ id, from, to, title }) => {
+const EdgeUI: Component<{
+  id?: string;
+  from: Accessor<Vec>;
+  to: Accessor<Vec>;
+  title?: Accessor<string>;
+}> = ({ id, from, to, title }) => {
   const pathDef = createMemo(() => `M ${from().x} ${from().y} L ${to().x} ${to().y}`);
 
   return (

@@ -1,17 +1,19 @@
 {
   "name": "thekorn-dev-website-2.0",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "prettier --write .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "typecheck": "tsgo --noEmit",
-    "lint": "eslint .",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "stylelint": "stylelint **/*.css",
-    "test": "pnpm check && pnpm typecheck && pnpm lint && pnpm stylelint"
+    "test": "pnpm format:check && pnpm typecheck && pnpm lint && pnpm stylelint"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -31,6 +33,8 @@
     "@typescript/native-preview": "7.0.0-dev.20260102.1",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
+    "oxfmt": "^0.23.0",
+    "oxlint": "^1.38.0",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
     "stylelint": "^16.26.1",
@@ -38,10 +42,10 @@
     "stylelint-config-tailwindcss": "^1.0.0",
     "typescript-eslint": "^8.51.0"
   },
+  "packageManager": "pnpm@10.24.0",
   "pnpm": {
     "overrides": {
       "esbuild": "^0.27.2"
     }
-  },
-  "packageManager": "pnpm@10.24.0"
+  }
 }

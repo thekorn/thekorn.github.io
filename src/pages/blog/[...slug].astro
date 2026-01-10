@@ -1,27 +1,28 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import Layout from '@layouts/Layout.astro';
-import { blogWebsite, getArticleSchema } from '@utils/structuredData';
-import LayoutShell from '@components/LayoutShell.astro';
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import { blogWebsite, getArticleSchema } from "@utils/structuredData";
+import LayoutShell from "@components/LayoutShell.astro";
+import Footer from "@components/Footer.astro";
 
-type Props = CollectionEntry<'blog'>;
+type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
 
 const articleStructuredData = getArticleSchema(post);
 
 const breadcrumbsStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
   itemListElement: [
     {
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: 1,
-      name: 'Blog',
+      name: "Blog",
       item: `${import.meta.env.SITE}/`,
     },
     {
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: 2,
       name: post.data.title,
       item: `${import.meta.env.SITE}/blog/${post.slug}/`,
@@ -30,12 +31,12 @@ const breadcrumbsStructuredData = {
 };
 
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [articleStructuredData, breadcrumbsStructuredData, blogWebsite],
+  "@context": "https://schema.org",
+  "@graph": [articleStructuredData, breadcrumbsStructuredData, blogWebsite],
 };
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => {
+  const posts = await getCollection("blog", ({ data }) => {
     if (import.meta.env.PROD) {
       return !data.draft;
     }
@@ -50,7 +51,11 @@ const { Content } = await post.render();
 ---
 
 <Layout title={`${post.data.title} | thekorn.dev`}>
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(jsonLd)}
+  />
   <LayoutShell path={`~/blog/${post.slug}`}>
     <div class="p-6">
       <article class="prose">
@@ -63,24 +68,17 @@ const { Content } = await post.render();
           <time class="text-sm text-(--color-fg-dim)">
             Last commit:
             {
-              post.data.pubDate.toLocaleDateString('en-us', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
+              post.data.pubDate.toLocaleDateString("en-us", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
               })
             }
           </time>
         </header>
         <Content />
       </article>
-      <div class="mt-10 pt-6 border-t border-(--color-border)">
-        <a
-          href="/"
-          class="inline-flex items-center gap-2 text-sm text-(--color-fg-dim) no-underline transition-all duration-150 hover:text-(--color-accent-yellow)"
-        >
-          <span class="text-(--color-accent-purple)">&#8592;</span>cd ~
-        </a>
-      </div>
+      <Footer>cd ~</Footer>
     </div>
   </LayoutShell>
 </Layout>

@@ -1,0 +1,16 @@
+---
+interface Props {
+  marker?: "←" | "❮";
+}
+
+const { marker = "←" } = Astro.props;
+---
+
+<div class="mt-10 pt-6 border-t border-(--color-border)">
+  <a
+    href="/"
+    class="inline-flex items-center gap-2 text-sm text-(--color-fg-dim) no-underline transition-all duration-150 hover:text-(--color-accent-yellow)"
+  >
+    <span class="text-(--color-accent-purple)">{marker}</span><slot />
+  </a>
+</div>

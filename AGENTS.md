@@ -14,14 +14,15 @@ Personal website built with Astro and Tailwind CSS v4. Statically generated with
 | `pnpm dev`          | Start dev server at localhost:4321                       |
 | `pnpm build`        | Build production site to `./dist/`                       |
 | `pnpm preview`      | Preview build locally                                    |
-| `pnpm check`        | Run Prettier (writes fixes)                              |
-| `pnpm format`       | Run oxfmt (write fixes)                                  |
-| `pnpm format:check` | Run oxfmt check mode                                     |
+| `pnpm format`       | Run oxfmt (writes fixes)                                 |
+| `pnpm format:check` | Run oxfmt in check mode                                  |
 | `pnpm typecheck`    | Run TypeScript type checking                             |
 | `pnpm lint`         | Run oxlint on all files                                  |
 | `pnpm lint:fix`     | Run oxlint with auto-fix                                 |
 | `pnpm stylelint`    | Run Stylelint on CSS files                               |
 | `pnpm test`         | Run all checks: format:check, typecheck, lint, stylelint |
+
+To run a single check, use one of: `pnpm format:check`, `pnpm typecheck`, `pnpm lint`, or `pnpm stylelint`.
 
 ## Code Style Guidelines
 
@@ -64,12 +65,20 @@ import type { ComponentProps } from "astro/types";
 - `@typescript-eslint/no-explicit-any`: warn
 - `@typescript-eslint/no-unused-vars`: error (ignore pattern: `^_`)
 
+### Naming Conventions
+
+- Components: PascalCase (e.g., `BlogPost.astro`)
+- Files: kebab-case (e.g., `my-helper.ts`)
+- Variables/functions: camelCase (e.g., `getPosts()`)
+- Constants: SCREAMING_SNAKE_CASE (e.g., `MAX_ITEMS`)
+- CSS classes: kebab-case for utility classes, BEM-style for custom classes
+
 ### Astro Components
 
 - Use `.astro` extension for all components
 - Define props interface and use `Astro.props` to access them
 - Use `ComponentProps<'a'>` for anchor element props
-- Use `lucide-react` for icons (not lucide-solid)
+- Use `@lucide/astro` for icons (not lucide-solid)
 
 ```astro
 ---
@@ -144,5 +153,5 @@ src/
 - Do not create unnecessary abstractions or utility functions
 - Do not use JavaScript `.js` files; use TypeScript `.ts`
 - Do not use React or SolidJS; this project uses Astro components
-- Do not use lucide-solid; use lucide-react instead
+- Do not use lucide-solid; use @lucide/astro instead
 - Do not commit secrets or credentials

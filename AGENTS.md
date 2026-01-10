@@ -4,21 +4,24 @@ This document provides guidelines for agentic coding agents operating in this re
 
 ## Project Overview
 
-Personal website built with Astro, SolidJS, and Tailwind CSS v4. Statically generated with content collections for blog posts.
+Personal website built with Astro and Tailwind CSS v4. Statically generated with content collections for blog posts. Components are Astro components, not SolidJS.
 
 ## Build/Lint/Test Commands
 
-| Command          | Action                                            |
-| ---------------- | ------------------------------------------------- |
-| `pnpm install`   | Install dependencies                              |
-| `pnpm dev`       | Start dev server at localhost:4321                |
-| `pnpm build`     | Build production site to `./dist/`                |
-| `pnpm preview`   | Preview build locally                             |
-| `pnpm check`     | Run Prettier (writes fixes)                       |
-| `pnpm typecheck` | Run TypeScript type checking                      |
-| `pnpm lint`      | Run ESLint on all files                           |
-| `pnpm stylelint` | Run Stylelint on CSS files                        |
-| `pnpm test`      | Run all checks: check, typecheck, lint, stylelint |
+| Command             | Action                                                   |
+| ------------------- | -------------------------------------------------------- |
+| `pnpm install`      | Install dependencies                                     |
+| `pnpm dev`          | Start dev server at localhost:4321                       |
+| `pnpm build`        | Build production site to `./dist/`                       |
+| `pnpm preview`      | Preview build locally                                    |
+| `pnpm check`        | Run Prettier (writes fixes)                              |
+| `pnpm format`       | Run oxfmt (write fixes)                                  |
+| `pnpm format:check` | Run oxfmt check mode                                     |
+| `pnpm typecheck`    | Run TypeScript type checking                             |
+| `pnpm lint`         | Run oxlint on all files                                  |
+| `pnpm lint:fix`     | Run oxlint with auto-fix                                 |
+| `pnpm stylelint`    | Run Stylelint on CSS files                               |
+| `pnpm test`         | Run all checks: format:check, typecheck, lint, stylelint |
 
 ## Code Style Guidelines
 
@@ -30,7 +33,7 @@ Personal website built with Astro, SolidJS, and Tailwind CSS v4. Statically gene
 
 ### TypeScript
 
-- Use TypeScript for all files (.ts, .tsx, .astro)
+- Use TypeScript for all files (.ts, .astro)
 - Extend from `astro/tsconfigs/strict` for type safety
 - Avoid `any` type; use `unknown` or explicit types instead
 - Prefix unused function parameters with `_` (e.g., `(_props: FooProps)`)
@@ -40,13 +43,13 @@ Personal website built with Astro, SolidJS, and Tailwind CSS v4. Statically gene
 ### Imports
 
 - Group imports in this order: built-in → external → aliases → relative
-- Use `splitProps` in SolidJS components to separate props
+- For Astro components, use `ComponentProps` from `astro/types` for prop types
 
 ```typescript
-import { splitProps, type Component, type JSX } from 'solid-js';
+import type { ComponentProps } from "astro/types";
 ```
 
-### Formatting (Prettier)
+### Formatting (oxfmt/Prettier)
 
 - Single quotes for JS/TS (`'value'`, not `"value"`)
 - Semi-colons: yes
@@ -56,29 +59,33 @@ import { splitProps, type Component, type JSX } from 'solid-js';
 - Trailing commas: es5 compatible
 - No tabs, use spaces
 
-### ESLint Rules
+### Linting (oxlint)
 
 - `@typescript-eslint/no-explicit-any`: warn
 - `@typescript-eslint/no-unused-vars`: error (ignore pattern: `^_`)
 
-### SolidJS Components
+### Astro Components
 
-- Use `Component<Props>` type for component signatures
-- Use `splitProps` to extract local props from `others`
-- Use computed/memoized values for derived state (e.g., `hoverClass()`)
-- Extend `JSX.AnchorHTMLAttributes` or similar for props interfaces
-- Use lucide-solid for icons
+- Use `.astro` extension for all components
+- Define props interface and use `Astro.props` to access them
+- Use `ComponentProps<'a'>` for anchor element props
+- Use `lucide-react` for icons (not lucide-solid)
 
-```typescript
-interface CTAButtonProps extends JSX.AnchorHTMLAttributes<HTMLAnchorElement> {
-  icon: Component<{ class?: string }>;
+```astro
+---
+import type { ComponentProps } from 'astro/types';
+
+interface Props extends ComponentProps<'a'> {
+  icon: 'Github' | 'Linkedin' | 'Mail';
   hoverColor?: 'blue' | 'purple';
 }
 
-const CTAButton: Component<CTAButtonProps> = (props) => {
-  const [local, others] = splitProps(props, ['icon', 'hoverColor', 'children']);
-  // ...
-};
+const { icon, hoverColor = 'blue', ...rest } = Astro.props;
+---
+
+<a class:list={[...]} {...rest}>
+  <slot />
+</a>
 ```
 
 ### Styling
@@ -123,7 +130,7 @@ const blog = defineCollection({
 
 ```
 src/
-├── components/     # SolidJS components
+├── components/     # Astro components
 ├── content/        # Markdown/MDX content
 ├── layouts/        # Shared Astro layouts
 ├── pages/          # Route pages (Astro)
@@ -136,5 +143,6 @@ src/
 - Do not add comments unless explaining non-obvious business logic
 - Do not create unnecessary abstractions or utility functions
 - Do not use JavaScript `.js` files; use TypeScript `.ts`
-- Do not use React; this project uses SolidJS
+- Do not use React or SolidJS; this project uses Astro components
+- Do not use lucide-solid; use lucide-react instead
 - Do not commit secrets or credentials

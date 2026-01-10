@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @plugin "@tailwindcss/typography";
 
@@ -20,7 +20,7 @@
   --color-gruvbox-orange: #fe8019;
   --color-gruvbox-gray: #928374;
   --font-mono:
-    'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'SF Mono', 'Menlo', 'Monaco', 'Consolas',
+    "JetBrains Mono", "Fira Code", "Source Code Pro", "SF Mono", "Menlo", "Monaco", "Consolas",
     monospace;
 }
 

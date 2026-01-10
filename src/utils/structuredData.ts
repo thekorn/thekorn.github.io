@@ -1,47 +1,47 @@
-import type { CollectionEntry } from 'astro:content';
-import type { Article, Person, WebSite, WithContext } from 'schema-dts';
+import type { CollectionEntry } from "astro:content";
+import type { Article, Person, WebSite, WithContext } from "schema-dts";
 
 export const blogWebsite: WithContext<WebSite> = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
+  "@context": "https://schema.org",
+  "@type": "WebSite",
   url: `${import.meta.env.SITE}/`,
-  name: 'thekorn.dev',
-  description: 'Personal blog of Markus Korn',
-  inLanguage: 'en_US',
+  name: "thekorn.dev",
+  description: "Personal blog of Markus Korn",
+  inLanguage: "en_US",
 };
 
 export const mainWebsite: WithContext<WebSite> = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
+  "@context": "https://schema.org",
+  "@type": "WebSite",
   url: import.meta.env.SITE,
-  name: 'Markus Korn - Personal page',
+  name: "Markus Korn - Personal page",
   description: "Markus Korn's contact page, portfolio and blog",
-  inLanguage: 'en_US',
+  inLanguage: "en_US",
 };
 
 export const personSchema: WithContext<Person> = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Markus Korn',
-  url: 'https://www.thekorn.dev',
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Markus Korn",
+  url: "https://www.thekorn.dev",
   image: `${import.meta.env.SITE}/thekorn.png`,
   sameAs: [
-    'https://github.com/thekorn',
-    'https://www.linkedin.com/in/markuskorn/',
+    "https://github.com/thekorn",
+    "https://www.linkedin.com/in/markuskorn/",
     // todo: add instagram
   ],
-  jobTitle: 'Principal Software Engineer',
+  jobTitle: "Principal Software Engineer",
   worksFor: {
-    '@type': 'Organization',
-    name: 'BurdaForward GmbH',
-    url: 'https://www.burda-forward.de',
+    "@type": "Organization",
+    name: "BurdaForward GmbH",
+    url: "https://www.burda-forward.de",
   },
 };
 
-export function getArticleSchema(post: CollectionEntry<'blog'>) {
+export function getArticleSchema(post: CollectionEntry<"blog">) {
   const articleStructuredData: WithContext<Article> = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
+    "@context": "https://schema.org",
+    "@type": "Article",
     headline: post.data.title,
     url: `${import.meta.env.SITE}/blog/${post.slug}/`,
     //image: {
@@ -51,14 +51,14 @@ export function getArticleSchema(post: CollectionEntry<'blog'>) {
     description: post.data.title,
     datePublished: post.data.pubDate.toString(),
     publisher: {
-      '@type': 'Person',
-      name: 'Markus Korn',
+      "@type": "Person",
+      name: "Markus Korn",
       url: import.meta.env.SITE,
       image: `${import.meta.env.SITE}/thekorn.png`,
     },
     author: {
-      '@type': 'Person',
-      name: 'Markus Korn',
+      "@type": "Person",
+      name: "Markus Korn",
       url: import.meta.env.SITE,
       image: `${import.meta.env.SITE}/thekorn.png`,
     },

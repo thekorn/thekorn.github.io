@@ -1,4 +1,4 @@
-import { icons } from '@lucide/astro';
+import { icons } from "@lucide/astro";
 
 type IconName = keyof typeof icons;
 

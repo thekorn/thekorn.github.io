@@ -6,29 +6,21 @@
   "languages": {
     "JavaScript": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
+        "source.fixAll.oxlint": true
       }
     },
     "TypeScript": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      },
-      "language_servers": ["!vtsls", "tsgo"]
+        "source.fixAll.oxlint": true
+      }
     },
     "TSX": {
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      },
-      "language_servers": ["eslint", "!vtsls", "tsgo", "tailwindcss-language-server"]
+        "source.fixAll.oxlint": true
+      }
     },
     "CSS": {
-      "formatter": { "language_server": { "name": "stylelint" } },
-      "language_servers": [
-        "!unocss-language-server",
-        "!css",
-        "tailwindcss-language-server",
-        "stylelint-lsp"
-      ]
+      "formatter": { "language_server": { "name": "stylelint" } }
     }
   },
   "auto_install_extensions": {

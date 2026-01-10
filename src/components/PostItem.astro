@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './LucideIcon.astro';
+import { isLucidIcon } from '../types';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+
+const formattedDate = post.data.pubDate.toLocaleDateString('en-gb', {
+  year: 'numeric',
+  month: 'short',
+  day: '2-digit',
+});
+
+const formattedTime = post.data.pubDate.toLocaleTimeString('en-gb', {
+  hour: '2-digit',
+  minute: '2-digit',
+});
+---
+
+<li class="mb-2">
+  <a
+    href={`/blog/${post.slug}/`}
+    class="flex items-center gap-3 p-3 bg-(--color-bg) border border-transparent rounded text-no-underline transition-all duration-150 hover:border-(--color-accent) hover:bg-(--color-bg-dim)"
+  >
+    <span class="text-gruvbox-yellow">thekorn</span>
+    <span class="text-sm text-gruvbox-blue">
+      {formattedDate}
+      {formattedTime}
+    </span>
+    {post.data.icon && isLucidIcon(post.data.icon) && <Icon name={post.data.icon} size={16} />}
+    <span class="flex-1 text-(--color-fg1)">{post.data.title}</span>
+  </a>
+</li>

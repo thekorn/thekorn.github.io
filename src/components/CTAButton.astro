@@ -1,0 +1,27 @@
+---
+import type { AstroComponent } from '@lucide/astro';
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {
+  icon: AstroComponent;
+  hoverColor?: 'blue' | 'purple';
+}
+
+const { icon: IconComponent, hoverColor = 'blue', ...rest } = Astro.props;
+
+const hoverClass =
+  hoverColor === 'purple'
+    ? 'hover:border-(--color-accent-purple) hover:text-(--color-accent-purple)'
+    : 'hover:border-(--color-accent-blue) hover:text-(--color-accent-blue)';
+---
+
+<a
+  class:list={[
+    'inline-flex items-center gap-2 px-4 py-2 bg-(--color-bg-dim) border border-(--color-border) rounded text-sm text-(--color-fg) no-underline transition-all duration-150',
+    hoverClass,
+  ]}
+  {...rest}
+>
+  <IconComponent class="w-4 h-4" />
+  <span class="text-(--color-fg-dim)"><slot /></span>
+</a>

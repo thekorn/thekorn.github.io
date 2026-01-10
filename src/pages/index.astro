@@ -1,14 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
-import CTAButton from '@components/CTAButton';
-import PostItem from '@components/PostItem';
+import CTAButton from '@components/CTAButton.astro';
+import Github from '@lucide/astro/icons/github';
+import Linkedin from '@lucide/astro/icons/linkedin';
+import Mail from '@lucide/astro/icons/mail';
+import PostItem from '@components/PostItem.astro';
 import Layout from '@layouts/Layout.astro';
 import { mainWebsite, personSchema } from '@utils/structuredData';
-import Github from 'lucide-solid/icons/github';
-import Linkedin from 'lucide-solid/icons/linkedin';
-import Mail from 'lucide-solid/icons/mail';
-import LayoutShell from '@components/LayoutShell';
-import ShellLine from '@components/ShellLine';
+import LayoutShell from '@components/LayoutShell.astro';
+import ShellLine from '@components/ShellLine.astro';
 
 const jsonLd = {
   '@context': 'https://schema.org',

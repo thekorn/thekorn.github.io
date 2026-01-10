@@ -1,0 +1,12 @@
+---
+interface Props {
+  color: string;
+}
+
+const { color } = Astro.props;
+---
+
+<span
+  class="before:h-4 before:aspect-square before:bg-(--color) before:mr-2 before:inline-block before:align-middle before:border before:border-(--tw-prose-body)"
+  style={`--color:${color}`}
+>{color}</span>

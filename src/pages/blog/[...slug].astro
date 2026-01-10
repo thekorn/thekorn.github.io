@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import { blogWebsite, getArticleSchema } from '@utils/structuredData';
-import LayoutShell from '@components/LayoutShell';
+import LayoutShell from '@components/LayoutShell.astro';
 
 type Props = CollectionEntry<'blog'>;
 

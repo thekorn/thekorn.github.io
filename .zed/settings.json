@@ -20,7 +20,11 @@
       }
     },
     "CSS": {
-      "formatter": { "language_server": { "name": "stylelint" } }
+      "formatter": { "language_server": { "name": "stylelint" } },
+      "code_actions_on_format": {
+        "source.fixAll.stylelint": true
+      },
+      "language_servers": ["tailwindcss-intellisense-css", "!vscode-css-language-server", "..."]
     }
   },
   "auto_install_extensions": {

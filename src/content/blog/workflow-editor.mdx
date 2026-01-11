@@ -176,7 +176,7 @@ const EdgeUI: Component<{
   return (
     <g id={id} data-edge>
       <path class="stroke-blue-500" d={pathDef()} marker-end="url(#arrowHead)" />
-      <path class="stroke-[25px] stroke-transparent" d={pathDef()} />
+      <path class="stroke-transparent stroke-[25px]" d={pathDef()} />
       <Show when={title?.()}>...</Show>
     </g>
   );

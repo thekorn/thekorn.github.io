@@ -6,6 +6,8 @@ icon: "Swords"
 draft: false
 ---
 
+import { Code } from "astro:components";
+
 ## Challenge 3: Boarding Pass
 
 After some very basic CSS implementations, I wanted to look into more complex designs. I found the figma community as a good starting point - and I took a boarding pass design as my first challange.
@@ -24,18 +26,36 @@ Used this community design by [Raveen Panditha](https://www.figma.com/community/
 
 ## Result
 
+The complex part of the design implementation are the curved shapes. I decided to do two implementations - one using <Code code={`clip-path: path(...)`} lang="css" inline /> and one using svg image masks.
+
 ### Front
 
-<iframe
-  src="/challenges/boardingPass"
-  height="844"
-  width="100%"
-  style="border:0;"
-  allowfullscreen="allowfullscreen"
-  loading="lazy"
-  title="Boarding Pass Challenge"
-></iframe>
-
+<div class="not-prose flex flex-col gap-4 md:w-[840px] md:flex-row">
+  <div class="flex w-full flex-col">
+    <h4>svg mask</h4>
+    <iframe
+      src="/challenges/boardingPass"
+      height="844"
+      width="100%"
+      style="border:0;"
+      allowfullscreen="allowfullscreen"
+      loading="lazy"
+      title="Boarding Pass Challenge"
+    ></iframe>
+  </div>
+  <div class="flex w-full flex-col">
+    <h4>clip-path</h4>
+    <iframe
+      src="/challenges/boardingPass-v2"
+      height="844"
+      width="100%"
+      style="border:0;"
+      allowfullscreen="allowfullscreen"
+      loading="lazy"
+      title="Boarding Pass Challenge"
+    ></iframe>
+  </div>
+</div>
 ### Back
 
 TBD ;)
@@ -44,3 +64,4 @@ TBD ;)
 
 - [affinity studio](https://www.affinity.studio) is an amazing free design tool.
 - proper shadow on masked divs is a pain - no idea how to do it properly yet.
+- whereas when using <Code code={`clip-path: path(...)`} lang="css" inline /> a shadow must be applied to the parent.

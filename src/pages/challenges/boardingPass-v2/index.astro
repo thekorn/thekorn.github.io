@@ -1,0 +1,146 @@
+---
+import "@fontsource-variable/inter";
+import Logo from "./logo.png";
+import PlaneImage from "./plane.png";
+import Globe from "./globe.png";
+import MenuDots from "./menu.svg";
+
+import { ChevronLeft, Plane } from "@lucide/astro";
+---
+
+<style is:global>
+  @import "tailwindcss";
+  @theme {
+    --font-sans: "Inter Variable", "sans-serif";
+  }
+
+  :root {
+    --bg: #dedcdc;
+    --brand: #5c0931;
+
+    --text: #706d6d;
+    --separator: #b3b3b3;
+  }
+
+  .ContentShape {
+    clip-path: path(
+      "\
+      M 0,38 \
+      L 0,623 \
+      A 48,48 0,0,0 \
+       48,661 \
+      L 304,661 \
+      A 48,48 0,0,0 \
+      347,623 \
+      L 347,92 \
+      A 48,48 0,0,0 \
+      322,58 \
+      L 42,0 \
+      A 48,48 0,0,0 \
+      0,38\
+      Z\
+    "
+    );
+  }
+
+  .HeaderShape {
+    clip-path: path(
+      "\
+      M 0,0 \
+      L 0,74 \
+      A 61,65 0,0,0 \
+      55,135 \
+      L 355,196 \
+      A 38,60 0,0,1 \
+      390,259 \
+      L 390,0 \
+      Z\
+    "
+    );
+  }
+</style>
+<div class="w-97.5 h-211 bg-(--bg) relative">
+  <div class="bg-(--brand) h-full w-full absolute HeaderShape">
+    <div
+      class="bg-(image:--globeBackground) h-full w-full pt-6 px-4"
+      style={`--globeBackground: url(${Globe.src});`}
+    >
+      <div class="flex text-white justify-center items-center">
+        <ChevronLeft class="flex-none" width={33} height={33} />
+        <div class="grow text-center font-semibold">My Flights</div>
+        <MenuDots class="flex-none" width={20} height={20} />
+      </div>
+    </div>
+  </div>
+  <img src={Logo.src} alt="Logo" class="absolute left-12 top-47 z-20 w-25" />
+  <img
+    src={PlaneImage.src}
+    alt="PlaneImage"
+    class="absolute top-35 -right-0.5 z-20"
+  />
+  <div
+    class="absolute bottom-0 w-full mb-6 ml-5 z-10 drop-shadow-[-10px_10px_10px_rgba(0,0,0,0.2)]"
+  >
+    <div
+      class="bg-white h-165.25 w-86.75 relative ContentShape shadow-2xl shadow-black"
+    >
+      <div
+        class="grid grid-cols-[1fr_33px_1fr] gap-2 h-91.5 absolute bottom-20 w-full px-4 items-center justify-center"
+      >
+        <div
+          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
+        >
+          <div class="">London</div>
+          <div class="text-(--brand) text-[28px] font-bold">LTN</div>
+          <div class="text-[12px]">9:20 pm</div>
+          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+        </div>
+        <Plane class="fill-black rotate-45 stroke-0" width={21} height={21} />
+        <div
+          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
+        >
+          <div class="">Doha</div>
+          <div class="text-(--brand) text-[28px] font-bold">DOH</div>
+          <div class="text-[12px]">1:20 am</div>
+          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+        </div>
+        <div class="col-span-3 border-t border-(--separator) mx-2"></div>
+        <div
+          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
+        >
+          <div class="">Sydney</div>
+          <div class="text-(--brand) text-[28px] font-bold">SYD</div>
+          <div class="text-[12px]">9:20 pm</div>
+          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+        </div>
+        <Plane class="fill-black rotate-45 stroke-0" width={21} height={21} />
+        <div
+          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
+        >
+          <div class="">Doha</div>
+          <div class="text-(--brand) text-[28px] font-bold">DOH</div>
+          <div class="text-[12px]">1:20 am</div>
+          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+        </div>
+        <div class="col-span-3 border-t border-(--separator) mx-2"></div>
+        <div
+          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
+        >
+          <div class="">London</div>
+          <div class="text-(--brand) text-[28px] font-bold">LHR</div>
+          <div class="text-[12px]">9:20 pm</div>
+          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+        </div>
+        <Plane class="fill-black rotate-45 stroke-0" width={21} height={21} />
+        <div
+          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
+        >
+          <div class="">Doha</div>
+          <div class="text-(--brand) text-[28px] font-bold">DXB</div>
+          <div class="text-[12px]">1:20 am</div>
+          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+---
+title: "Visualizing Monorepo Dependencies with WebGL"
+description: "a weekend project exploring graph visualization with sigma.js and graphology"
+pubDate: "2026-02-01 19:00:00"
+icon: "Network"
+draft: false
+---
+
+## The Problem
+
+Working with large monorepos, I often find myself asking: "What depends on this package?" or "If I change this, what breaks?" The answers are buried in `package.json` files scattered across dozens of directories. Tracing dependencies manually is tedious and error-prone.
+
+So I built [rush-workspace-viz](https://github.com/thekorn/rush-workspace-viz) - an interactive graph visualization for rush monorepo dependencies.
+
+![rush-workspace-viz Screenshot](/images/rush-workspace-viz-sample.png)
+
+## Why WebGL?
+
+The natural question is: why not just render the graph with SVG or Canvas 2D? For small graphs, that works fine. But monorepos can have hundreds of packages with thousands of dependency edges. Traditional DOM-based rendering starts to crawl when you hit this scale.
+
+**sigma.js** renders graphs using WebGL, which offloads the heavy lifting to the GPU. The performance difference is dramatic:
+
+| Approach  | 100 nodes | 500 nodes | 1000+ nodes |
+| --------- | --------- | --------- | ----------- |
+| SVG/DOM   | Smooth    | Sluggish  | Unusable    |
+| Canvas 2D | Smooth    | Okay      | Sluggish    |
+| WebGL     | Smooth    | Smooth    | Smooth      |
+
+WebGL batch-renders all nodes and edges in a single draw call, avoiding the per-element overhead of SVG. Panning, zooming, and hovering remain responsive even with complex graphs. For a visualization tool that needs to handle real-world monorepos, this was non-negotiable.
+
+## Features
+
+The tool provides several ways to explore your dependency graph:
+
+- **Search and filter** - Find packages by name instantly
+- **Dependency exploration** - Click a node to see what it depends on or what depends on it
+- **Filter by type** - Toggle between production and dev dependencies
+- **Real-time updates** - WebSocket connection keeps the graph in sync as you modify packages
+
+## Tech Stack
+
+I went with a minimal but powerful stack:
+
+- **Bun** - Fast runtime and package manager
+- **graphology** - In-memory graph data structure with a rich API
+- **sigma.js** - WebGL-based graph renderer
+- **Tailwind CSS v4** - Styling
+- **tsgo** - Type checking
+
+The combination of graphology and sigma.js is particularly nice. Graphology handles all the graph operations (adding nodes, edges, traversals, filtering) while sigma.js focuses purely on rendering. Clean separation of concerns.
+
+## How It Works
+
+The CLI reads the rush configuration and all `package.json` files in the workspace, builds a dependency graph with graphology, then serves an interactive frontend. The WebSocket connection allows the graph to update in real-time if packages change.
+
+```bash
+bun run cli serve
+```
+
+Open `http://localhost:3000` and you're exploring your dependency graph.
+
+## The Weekend Project Mindset
+
+This started as a quick hack on Saturday morning. By Sunday evening, it had grown into something genuinely useful. Weekend projects have a special quality - no sprint planning, no code reviews, no debates about architecture. Just you and the problem.
+
+Sometimes that leads to messy code. Sometimes it leads to surprisingly clean solutions because you're not overthinking it. This one landed somewhere in the middle, and I'm okay with that.
+
+## Try It Out
+
+If you work with rush monorepos, give it a spin. The code is on [GitHub](https://github.com/thekorn/rush-workspace-viz). Issues and contributions welcome.

@@ -43,7 +43,7 @@ export function getArticleSchema(post: CollectionEntry<"blog">) {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.data.title,
-    url: `${import.meta.env.SITE}/blog/${post.slug}/`,
+    url: `${import.meta.env.SITE}/blog/${post.id}/`,
     //image: {
     //  '@type': 'ImageObject',
     //  url: `${import.meta.env.SITE}${post.data.cover.src}/`,

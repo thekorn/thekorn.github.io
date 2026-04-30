@@ -1,7 +1,17 @@
 ---
+import { css } from 'styled-system/css';
 
+const line = css({
+  marginBottom: '2',
+  color: 'accent',
+});
+
+const prompt = css({
+  color: 'accentPurple',
+  marginRight: '1',
+});
 ---
 
-<p class="mb-2 text-(--color-accent)">
-  <span class="text-(--color-accent-purple) mr-1">$</span><slot />
+<p class={line}>
+  <span class={prompt}>$</span><slot />
 </p>

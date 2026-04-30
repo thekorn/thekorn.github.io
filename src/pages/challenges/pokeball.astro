@@ -1,31 +1,71 @@
 <style is:global>
-  @import 'tailwindcss';
   :root {
-    --yellow: #f6df96;
-    --bg: #6cb3a9;
-    --dark-red: #781728;
-    --red: #d25b70;
+    --pb-yellow: #f6df96;
+    --pb-bg: #6cb3a9;
+    --pb-dark-red: #781728;
+    --pb-red: #d25b70;
+  }
+
+  .pokeball-page {
+    --u: 0.25rem;
+    height: calc(100 * var(--u));
+    width: calc(100 * var(--u));
+    aspect-ratio: 1;
+    background: var(--pb-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .pokeball-page .ball {
+    height: calc(80 * var(--u));
+    width: calc(80 * var(--u));
+    aspect-ratio: 1;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+      180deg,
+      var(--pb-red) 150px,
+      var(--pb-dark-red) 150px,
+      var(--pb-dark-red) 170px,
+      white 170px
+    );
+    position: relative;
+  }
+
+  .pokeball-page .center {
+    height: calc(20 * var(--u));
+    width: calc(20 * var(--u));
+    aspect-ratio: 1;
+    background: var(--pb-yellow);
+    border-radius: 9999px;
+    border: calc(10 * var(--u)) solid var(--pb-dark-red);
+    position: relative;
+    z-index: 1;
+  }
+
+  .pokeball-page .band {
+    height: calc(5 * var(--u));
+    width: 320px;
+    left: calc(10 * var(--u));
+    top: calc(47.5 * var(--u));
+    position: absolute;
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      var(--pb-bg) 10px,
+      transparent 10px,
+      transparent 310px,
+      var(--pb-bg) 310px
+    );
   }
 </style>
-<div class="h-100 aspect-square bg-(--bg) flex justify-center items-center">
-  <div
-    class:list={[
-      'h-80 aspect-square rounded-full',
-      'flex justify-center items-center',
-      'bg-linear-[180deg,var(--red)_150px,var(--dark-red)_150px,var(--dark-red)_170px,white_170px]',
-    ]}
-  >
-    <div
-      class:list={['h-20 aspect-square bg-(--yellow) rounded-full border-10 border-(--dark-red)']}
-    >
-      <div
-        class:list={[
-          'h-5 w-[320px] left-10 top-47.5',
-          'absolute',
-          'bg-linear-[90deg,var(--bg)_10px,#00000000_10px,#00000000_310px,var(--bg)_310px]',
-        ]}
-      >
-      </div>
-    </div>
+<div class="pokeball-page">
+  <div class="ball">
+    <div class="center"></div>
+    <div class="band"></div>
   </div>
 </div>

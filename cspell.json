@@ -1,0 +1,37 @@
+{
+  "words": [
+    "thekorn",
+    "markus",
+    "burda",
+    "lucide",
+    "markuskorn",
+    "filesize",
+    "pokeball",
+    "miterlimit",
+    "linejoin",
+    "evenodd",
+    "shiki",
+    "shikijs",
+    "Shirazi's",
+    "esbuild",
+    "oxlint",
+    "oxfmt",
+    "Menlo",
+    "Consolas",
+    "Raveen",
+    "Panditha",
+    "macbook",
+    "microvms",
+    "ghostty",
+    "solidjs",
+    "nvim",
+    "fontsource"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "scripts/**",
+    "dist/**",
+    ".zed/settings.json",
+    "pnpm-lock.yaml"
+  ]
+}

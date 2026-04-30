@@ -13,7 +13,8 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "stylelint": "stylelint **/*.css",
-    "test": "pnpm format:check && pnpm typecheck && pnpm lint && pnpm stylelint"
+    "cspell": "cspell .",
+    "test": "pnpm cspell && pnpm format:check && pnpm typecheck && pnpm lint && pnpm stylelint"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
@@ -30,6 +31,7 @@
     "@eslint/js": "^10.0.1",
     "@shikijs/rehype": "^4.0.2",
     "@tailwindcss/typography": "^0.5.19",
+    "cspell": "^10.0.0",
     "oxfmt": "^0.47.0",
     "oxlint": "^1.62.0",
     "stylelint": "^17.9.1",

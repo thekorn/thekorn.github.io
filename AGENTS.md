@@ -4,25 +4,26 @@ This document provides guidelines for agentic coding agents operating in this re
 
 ## Project Overview
 
-Personal website built with Astro and Tailwind CSS v4. Statically generated with content collections for blog posts. Components are Astro components, not SolidJS.
+Personal website built with Astro and Panda CSS. Statically generated with content collections for blog posts. Components are Astro components, not SolidJS.
 
 ## Build/Lint/Test Commands
 
-| Command             | Action                                                   |
-| ------------------- | -------------------------------------------------------- |
-| `pnpm install`      | Install dependencies                                     |
-| `pnpm dev`          | Start dev server at localhost:4321                       |
-| `pnpm build`        | Build production site to `./dist/`                       |
-| `pnpm preview`      | Preview build locally                                    |
-| `pnpm format`       | Run oxfmt (writes fixes)                                 |
-| `pnpm format:check` | Run oxfmt in check mode                                  |
-| `pnpm typecheck`    | Run TypeScript type checking                             |
-| `pnpm lint`         | Run oxlint on all files                                  |
-| `pnpm lint:fix`     | Run oxlint with auto-fix                                 |
-| `pnpm stylelint`    | Run Stylelint on CSS files                               |
-| `pnpm test`         | Run all checks: format:check, typecheck, lint, stylelint |
+| Command             | Action                                                    |
+| ------------------- | --------------------------------------------------------- |
+| `pnpm install`      | Install dependencies (runs `panda codegen` via `prepare`) |
+| `pnpm dev`          | Start dev server at localhost:4321                        |
+| `pnpm build`        | Build production site to `./dist/`                        |
+| `pnpm preview`      | Preview build locally                                     |
+| `pnpm format`       | Run oxfmt (writes fixes)                                  |
+| `pnpm format:check` | Run oxfmt in check mode                                   |
+| `pnpm typecheck`    | Run TypeScript type checking                              |
+| `pnpm lint`         | Run oxlint on all files                                   |
+| `pnpm lint:fix`     | Run oxlint with auto-fix                                  |
+| `pnpm stylelint`    | Run Stylelint on CSS files                                |
+| `pnpm cspell`       | Spell-check tracked paths                                 |
+| `pnpm test`         | Run cspell, format:check, typecheck, lint, stylelint      |
 
-To run a single check, use one of: `pnpm format:check`, `pnpm typecheck`, `pnpm lint`, or `pnpm stylelint`.
+To run a single check, use one of: `pnpm format:check`, `pnpm typecheck`, `pnpm lint`, `pnpm stylelint`, or `pnpm cspell`.
 
 ## Code Style Guidelines
 
@@ -38,7 +39,7 @@ To run a single check, use one of: `pnpm format:check`, `pnpm typecheck`, `pnpm 
 - Extend from `astro/tsconfigs/strict` for type safety
 - Avoid `any` type; use `unknown` or explicit types instead
 - Prefix unused function parameters with `_` (e.g., `(_props: FooProps)`)
-- Use path aliases: `@components/*`, `@utils/*`, `@layouts/*`, `@styles/*`
+- Use path aliases: `@components/*`, `@utils/*`, `@layouts/*`, `@styles/*`, and `styled-system/css` for Panda `css()`
 - Add `// @ts-check` at the top of config files (.mjs/.cjs)
 
 ### Imports
@@ -99,10 +100,10 @@ const { icon, hoverColor = 'blue', ...rest } = Astro.props;
 
 ### Styling
 
-- Use Tailwind CSS v4 with CSS variables for theming
-- Pattern: `bg-(--color-bg-dim)`, `text-(--color-fg)`
-- Keep styles co-located with components when possible
-- Stylelint configured with `stylelint-config-standard` and `stylelint-config-tailwindcss`
+- Use [Panda CSS](https://panda-css.com/) with `css()` from `styled-system/css`; tokens live in `panda.config.ts`
+- Global base styles and Markdown prose live in `src/styles/global.css` (with `@layer reset, base, tokens, recipes, utilities`)
+- Keep Panda styles co-located in `.astro` frontmatter when possible; challenge demos may use plain CSS in `<style>`
+- Stylelint uses `stylelint-config-standard` only
 
 ### Content Collections
 

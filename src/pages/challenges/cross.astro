@@ -1,25 +1,76 @@
 <style is:global>
-  @import 'tailwindcss';
   :root {
-    --bg: #f3ead2;
-    --dark: #38483c;
-    --red: #c36768;
+    --cross-bg: #f3ead2;
+    --cross-dark: #38483c;
+    --cross-red: #c36768;
+  }
+
+  .cross-page {
+    --u: 0.25rem;
+    height: calc(100 * var(--u));
+    width: calc(100 * var(--u));
+    aspect-ratio: 1;
+    background: var(--cross-bg);
+    position: relative;
+  }
+
+  .cross-page .bar-h,
+  .cross-page .bar-v {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cross-page .bar-h-inner {
+    height: calc(10 * var(--u));
+    width: calc(80 * var(--u));
+    background: linear-gradient(
+      90deg,
+      var(--cross-dark) 40px,
+      var(--cross-red) 40px,
+      var(--cross-red) calc(100% - 40px),
+      var(--cross-dark) calc(100% - 40px)
+    );
+  }
+
+  .cross-page .bar-v-inner {
+    height: calc(10 * var(--u));
+    width: calc(80 * var(--u));
+    background: linear-gradient(
+      90deg,
+      var(--cross-dark) 40px,
+      var(--cross-red) 40px,
+      var(--cross-red) calc(100% - 40px),
+      var(--cross-dark) 20px
+    );
+    transform: rotate(90deg);
+  }
+
+  .cross-page .center-cap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cross-page .center-cap-inner {
+    height: calc(14 * var(--u));
+    width: calc(14 * var(--u));
+    aspect-ratio: 1;
+    background: var(--cross-dark);
   }
 </style>
-<div class="h-100 aspect-square bg-(--bg) relative">
-  <div class="absolute inset-0 flex items-center justify-center">
-    <div
-      class="h-10 w-80 bg-linear-[90deg,var(--dark)_40px,var(--red)_40px,var(--red)_280px,var(--dark)_280px]"
-    >
-    </div>
+<div class="cross-page">
+  <div class="bar-h">
+    <div class="bar-h-inner"></div>
   </div>
-  <div class="absolute inset-0 flex items-center justify-center">
-    <div
-      class="h-10 w-80 bg-linear-[90deg,var(--dark)_40px,var(--red)_40px,var(--red)_280px,var(--dark)_20px] rotate-90"
-    >
-    </div>
+  <div class="bar-v">
+    <div class="bar-v-inner"></div>
   </div>
-  <div class="absolute inset-0 flex items-center justify-center">
-    <div class="h-14 aspect-square bg-(--dark)"></div>
+  <div class="center-cap">
+    <div class="center-cap-inner"></div>
   </div>
 </div>

@@ -1,118 +1,230 @@
 ---
-import "@fontsource-variable/inter";
-import Logo from "./logo.png";
-import PlaneImage from "./plane.png";
-import Globe from "./globe.png";
-import MenuDots from "./menu.svg";
-import TopPart from "./top_part.svg";
-import ContentTop from "./content_top.svg";
+import '@fontsource-variable/inter/index.css';
+import Logo from './logo.png';
+import PlaneImage from './plane.png';
+import Globe from './globe.png';
+import MenuDots from './menu.svg';
+import TopPart from './top_part.svg';
+import ContentTop from './content_top.svg';
 
-import { ChevronLeft, Plane } from "@lucide/astro";
+import { ChevronLeft, Plane } from '@lucide/astro';
 ---
 
 <style is:global>
-  @import "tailwindcss";
-  @theme {
-    --font-sans: "Inter Variable", "sans-serif";
+  .bp-v1 {
+    --u: 0.25rem;
+    --bp-bg: #dedcdc;
+    --bp-brand: #5c0931;
+    --bp-text: #706d6d;
+    --bp-separator: #b3b3b3;
+    font-family: 'Inter Variable', sans-serif;
+    width: calc(97.5 * var(--u));
+    height: calc(211 * var(--u));
+    background: var(--bp-bg);
+    position: relative;
   }
 
-  :root {
-    --bg: #dedcdc;
-    --brand: #5c0931;
-
-    --text: #706d6d;
-    --separator: #b3b3b3;
+  .bp-v1__header {
+    mask-image: var(--topPartMask);
+    mask-repeat: no-repeat;
+    -webkit-mask-image: var(--topPartMask);
+    -webkit-mask-repeat: no-repeat;
+    background: var(--bp-brand);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    inset: 0;
   }
 
-  .details::before {
-    /*this does not work correctly with tailwind*/
+  .bp-v1__globe {
+    background-image: var(--globeBackground);
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    padding-top: calc(6 * var(--u));
+    padding-left: calc(4 * var(--u));
+    padding-right: calc(4 * var(--u));
+  }
+
+  .bp-v1__toolbar {
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bp-v1__toolbar :global(svg:first-of-type) {
+    flex: none;
+  }
+
+  .bp-v1__menu {
+    flex: none;
+  }
+
+  .bp-v1__toolbar-title {
+    flex-grow: 1;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .bp-v1__logo {
+    position: absolute;
+    left: calc(12 * var(--u));
+    top: calc(47 * var(--u));
+    z-index: 20;
+    width: calc(25 * var(--u));
+    height: auto;
+  }
+
+  .bp-v1__plane {
+    position: absolute;
+    top: calc(35 * var(--u));
+    right: calc(-0.5 * var(--u));
+    z-index: 20;
+    height: auto;
+  }
+
+  .bp-v1__details {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: calc(6 * var(--u));
+    margin-left: calc(5 * var(--u));
+    z-index: 10;
+  }
+
+  .bp-v1__details::before {
+    content: '';
+    position: absolute;
+    top: calc(12.5 * var(--u));
+    left: 0;
+    border-radius: 3rem;
+    z-index: -10;
+    opacity: 0.3;
+    filter: blur(12px);
+    height: calc(100% - 50px);
+    width: calc(100% - 50px);
     background: linear-gradient(to bottom right, #000);
   }
+
+  .bp-v1__card {
+    background: white;
+    height: calc(165.25 * var(--u));
+    width: calc(86.75 * var(--u));
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+    mask-image: linear-gradient(#fff 0 0), var(--contentTopMask);
+    mask-repeat: no-repeat;
+    mask-composite: subtract;
+    -webkit-mask-image: linear-gradient(#fff 0 0), var(--contentTopMask);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-composite: xor;
+    position: relative;
+  }
+
+  .bp-v1__grid {
+    display: grid;
+    grid-template-columns: 1fr 33px 1fr;
+    gap: calc(2 * var(--u));
+    height: calc(91.5 * var(--u));
+    position: absolute;
+    bottom: calc(20 * var(--u));
+    width: 100%;
+    padding-left: calc(4 * var(--u));
+    padding-right: calc(4 * var(--u));
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bp-v1__cell {
+    color: var(--bp-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .bp-v1__code {
+    color: var(--bp-brand);
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  .bp-v1__small {
+    font-size: 12px;
+  }
+
+  .bp-v1__divider {
+    grid-column: span 3;
+    border-top: 1px solid var(--bp-separator);
+    margin-left: calc(2 * var(--u));
+    margin-right: calc(2 * var(--u));
+  }
+
+  .bp-v1__plane-icon {
+    transform: rotate(45deg);
+    fill: black;
+    stroke: none;
+  }
 </style>
-<div class="w-97.5 h-211 bg-(--bg) relative">
-  <div
-    class="mask-(--topPartMask) bg-(--brand) h-full w-full mask-no-repeat absolute"
-    style={`--topPartMask: url(${TopPart.src});`}
-  >
-    <div
-      class="bg-(image:--globeBackground) h-full w-full pt-6 px-4"
-      style={`--globeBackground: url(${Globe.src});`}
-    >
-      <div class="flex text-white justify-center items-center">
-        <ChevronLeft class="flex-none" width={33} height={33} />
-        <div class="grow text-center font-semibold">My Flights</div>
-        <MenuDots class="flex-none" width={20} height={20} />
+<div class="bp-v1">
+  <div class="bp-v1__header" style={`--topPartMask:url(${TopPart.src})`}>
+    <div class="bp-v1__globe" style={`--globeBackground:url(${Globe.src})`}>
+      <div class="bp-v1__toolbar">
+        <ChevronLeft width={33} height={33} />
+        <div class="bp-v1__toolbar-title">My Flights</div>
+        <MenuDots class="bp-v1__menu" width={20} height={20} />
       </div>
     </div>
   </div>
-  <img src={Logo.src} alt="Logo" class="absolute left-12 top-47 z-20 w-25" />
-  <img
-    src={PlaneImage.src}
-    alt="PlaneImage"
-    class="absolute top-35 -right-0.5 z-20"
-  />
-  <div
-    class="absolute bottom-0 w-full mb-6 ml-5 z-10 details before:absolute before:top-12.5 before:left-0 before:rounded-[3rem] before:-z-10 before:opacity-30 before:blur-md before:h-[calc(100%-50px)] before:w-[calc(100%-50px)]"
-  >
-    <div
-      class="bg-white h-165.25 w-86.75 rounded-b-[3rem] mask-subtract mask-[linear-gradient(#fff_0_0),var(--ContentTopMask)] mask-no-repeat relative"
-      style={`--ContentTopMask: url(${ContentTop.src});`}
-    >
-      <div
-        class="grid grid-cols-[1fr_33px_1fr] gap-2 h-91.5 absolute bottom-20 w-full px-4 items-center justify-center"
-      >
-        <div
-          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
-        >
-          <div class="">London</div>
-          <div class="text-(--brand) text-[28px] font-bold">LTN</div>
-          <div class="text-[12px]">9:20 pm</div>
-          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+  <img src={Logo.src} alt="Logo" class="bp-v1__logo" />
+  <img src={PlaneImage.src} alt="Plane" class="bp-v1__plane" />
+  <div class="bp-v1__details">
+    <div class="bp-v1__card" style={`--contentTopMask:url(${ContentTop.src})`}>
+      <div class="bp-v1__grid">
+        <div class="bp-v1__cell">
+          <div>London</div>
+          <div class="bp-v1__code">LTN</div>
+          <div class="bp-v1__small">9:20 pm</div>
+          <div class="bp-v1__small">Sun, 20 Mar 2021</div>
         </div>
-        <Plane class="fill-black rotate-45 stroke-0" width={21} height={21} />
-        <div
-          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
-        >
-          <div class="">Doha</div>
-          <div class="text-(--brand) text-[28px] font-bold">DOH</div>
-          <div class="text-[12px]">1:20 am</div>
-          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+        <Plane class="bp-v1__plane-icon" width={21} height={21} />
+        <div class="bp-v1__cell">
+          <div>Doha</div>
+          <div class="bp-v1__code">DOH</div>
+          <div class="bp-v1__small">1:20 am</div>
+          <div class="bp-v1__small">Sun, 20 Mar 2021</div>
         </div>
-        <div class="col-span-3 border-t border-(--separator) mx-2"></div>
-        <div
-          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
-        >
-          <div class="">Sydney</div>
-          <div class="text-(--brand) text-[28px] font-bold">SYD</div>
-          <div class="text-[12px]">9:20 pm</div>
-          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+        <div class="bp-v1__divider"></div>
+        <div class="bp-v1__cell">
+          <div>Sydney</div>
+          <div class="bp-v1__code">SYD</div>
+          <div class="bp-v1__small">9:20 pm</div>
+          <div class="bp-v1__small">Sun, 20 Mar 2021</div>
         </div>
-        <Plane class="fill-black rotate-45 stroke-0" width={21} height={21} />
-        <div
-          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
-        >
-          <div class="">Doha</div>
-          <div class="text-(--brand) text-[28px] font-bold">DOH</div>
-          <div class="text-[12px]">1:20 am</div>
-          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+        <Plane class="bp-v1__plane-icon" width={21} height={21} />
+        <div class="bp-v1__cell">
+          <div>Doha</div>
+          <div class="bp-v1__code">DOH</div>
+          <div class="bp-v1__small">1:20 am</div>
+          <div class="bp-v1__small">Sun, 20 Mar 2021</div>
         </div>
-        <div class="col-span-3 border-t border-(--separator) mx-2"></div>
-        <div
-          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
-        >
-          <div class="">London</div>
-          <div class="text-(--brand) text-[28px] font-bold">LHR</div>
-          <div class="text-[12px]">9:20 pm</div>
-          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+        <div class="bp-v1__divider"></div>
+        <div class="bp-v1__cell">
+          <div>London</div>
+          <div class="bp-v1__code">LHR</div>
+          <div class="bp-v1__small">9:20 pm</div>
+          <div class="bp-v1__small">Sun, 20 Mar 2021</div>
         </div>
-        <Plane class="fill-black rotate-45 stroke-0" width={21} height={21} />
-        <div
-          class="text-(--text) flex flex-col items-center justify-center text-[15px] font-medium"
-        >
-          <div class="">Doha</div>
-          <div class="text-(--brand) text-[28px] font-bold">DXB</div>
-          <div class="text-[12px]">1:20 am</div>
-          <div class="text-[12px]">Sun, 20 Mar 2021</div>
+        <Plane class="bp-v1__plane-icon" width={21} height={21} />
+        <div class="bp-v1__cell">
+          <div>Doha</div>
+          <div class="bp-v1__code">DXB</div>
+          <div class="bp-v1__small">1:20 am</div>
+          <div class="bp-v1__small">Sun, 20 Mar 2021</div>
         </div>
       </div>
     </div>

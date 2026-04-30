@@ -25,10 +25,15 @@
     "ghostty",
     "solidjs",
     "nvim",
-    "fontsource"
+    "fontsource",
+    "codegen",
+    "pandacss",
+    "Fira",
+    "frontmatter"
   ],
   "ignorePaths": [
     "node_modules/**",
+    "styled-system/**",
     "scripts/**",
     "dist/**",
     ".zed/settings.json",

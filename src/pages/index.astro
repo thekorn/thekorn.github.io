@@ -1,55 +1,92 @@
 ---
-import { getCollection } from "astro:content";
-import CTAButton from "@components/CTAButton.astro";
-import GithubBrandIcon from "@components/icons/github-brand";
-import LinkedinBrandIcon from "@components/icons/linkedin-brand";
-import Mail from "@lucide/astro/icons/mail";
-import PostItem from "@components/PostItem.astro";
-import Layout from "@layouts/Layout.astro";
-import { mainWebsite, personSchema } from "@utils/structuredData";
-import LayoutShell from "@components/LayoutShell.astro";
-import ShellLine from "@components/ShellLine.astro";
-import Footer from "@components/Footer.astro";
+import { getCollection } from 'astro:content';
+import { css } from 'styled-system/css';
+import CTAButton from '@components/CTAButton.astro';
+import GithubBrandIcon from '@components/icons/github-brand';
+import LinkedinBrandIcon from '@components/icons/linkedin-brand';
+import Mail from '@lucide/astro/icons/mail';
+import PostItem from '@components/PostItem.astro';
+import Layout from '@layouts/Layout.astro';
+import { mainWebsite, personSchema } from '@utils/structuredData';
+import LayoutShell from '@components/LayoutShell.astro';
+import ShellLine from '@components/ShellLine.astro';
+import Footer from '@components/Footer.astro';
 
 const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [mainWebsite, personSchema],
+  '@context': 'https://schema.org',
+  '@graph': [mainWebsite, personSchema],
 };
 
 const posts = (
-  await getCollection("blog", ({ data }) => {
+  await getCollection('blog', ({ data }) => {
     if (import.meta.env.PROD) {
       return !data.draft;
     }
     return true;
   })
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const container = css({
+  padding: '6',
+});
+
+const header = css({
+  marginBottom: '10',
+});
+
+const title = css({
+  fontSize: '3xl',
+  fontWeight: 'bold',
+  color: 'fg0',
+});
+
+const tagline = css({
+  marginTop: '2',
+  fontSize: 'lg',
+  color: 'fgDim',
+});
+
+const section = css({
+  marginBottom: '10',
+});
+
+const about = css({
+  fontSize: 'lg',
+  lineHeight: 'relaxed',
+  color: 'fg',
+  marginBottom: '6',
+});
+
+const ctaRow = css({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '3',
+});
+
+const postList = css({
+  listStyle: 'none',
+  padding: '0',
+  margin: '0',
+});
 ---
 
 <Layout title="thekorn.dev">
-  <script
-    is:inline
-    type="application/ld+json"
-    set:html={JSON.stringify(jsonLd)}
-  />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <LayoutShell path="~">
-    <div class="p-6">
-      <header class="mb-10">
+    <div class={container}>
+      <header class={header}>
         <ShellLine>whoami</ShellLine>
-        <h1 class="text-3xl font-bold text-(--color-fg0)">thekorn</h1>
-        <p class="mt-2 text-lg text-(--color-fg-dim)">
-          Software engineer, developer, creator
-        </p>
+        <h1 class={title}>thekorn</h1>
+        <p class={tagline}>Software engineer, developer, creator</p>
       </header>
 
-      <section class="mb-10">
+      <section class={section}>
         <ShellLine>cat about.txt</ShellLine>
-        <p class="text-lg leading-relaxed text-(--color-fg) mb-6">
-          Welcome to my personal website. I'm a software engineer and I love
-          building things for the web and I write about software development,
-          programming, and technology.
+        <p class={about}>
+          Welcome to my personal website. I'm a software engineer and I love building things for the
+          web and I write about software development, programming, and technology.
         </p>
-        <div class="flex flex-wrap gap-3">
+        <div class={ctaRow}>
           <CTAButton
             href="https://github.com/thekorn"
             icon={GithubBrandIcon}
@@ -66,23 +103,18 @@ const posts = (
           >
             markuskorn
           </CTAButton>
-          <CTAButton
-            href="mailto:hello@thekorn.dev"
-            icon={Mail}
-            hoverColor="purple"
-          >
+          <CTAButton href="mailto:hello@thekorn.dev" icon={Mail} hoverColor="purple">
             hello@thekorn.dev
           </CTAButton>
         </div>
       </section>
 
       <section>
-        <ShellLine
-          >alias ll="eza --icons --long --no-permissions --no-filesize
-          --no-permissions --no-git"
+        <ShellLine>
+          alias ll="eza --icons --long --no-permissions --no-filesize --no-permissions --no-git"
         </ShellLine>
         <ShellLine>ll ./blog</ShellLine>
-        <ul class="list-none p-0">
+        <ul class={postList}>
           {posts.map((post) => <PostItem post={post} />)}
         </ul>
       </section>

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { css } from 'styled-system/css';
 import Icon from './LucideIcon.astro';
 import { isLucidIcon } from '../types';
 
@@ -19,19 +20,55 @@ const formattedTime = post.data.pubDate.toLocaleTimeString('en-gb', {
   hour: '2-digit',
   minute: '2-digit',
 });
+
+const item = css({
+  marginBottom: '2',
+});
+
+const link = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '3',
+  padding: '3',
+  bg: 'bg',
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: 'transparent',
+  borderRadius: 'md',
+  textDecoration: 'none',
+  color: 'inherit',
+  transitionProperty: 'border-color, background-color',
+  transitionDuration: 'fast',
+  transitionTimingFunction: 'default',
+  _hover: {
+    borderColor: 'accent',
+    bg: 'bgDim',
+  },
+});
+
+const user = css({
+  color: 'gruvbox.yellow',
+});
+
+const meta = css({
+  fontSize: 'sm',
+  color: 'gruvbox.blue',
+});
+
+const title = css({
+  flex: '1',
+  color: 'fg1',
+});
 ---
 
-<li class="mb-2">
-  <a
-    href={`/blog/${post.id}/`}
-    class="flex items-center gap-3 p-3 bg-(--color-bg) border border-transparent rounded text-no-underline transition-all duration-150 hover:border-(--color-accent) hover:bg-(--color-bg-dim)"
-  >
-    <span class="text-gruvbox-yellow">thekorn</span>
-    <span class="text-sm text-gruvbox-blue">
+<li class={item}>
+  <a href={`/blog/${post.id}/`} class={link}>
+    <span class={user}>thekorn</span>
+    <span class={meta}>
       {formattedDate}
       {formattedTime}
     </span>
     {post.data.icon && isLucidIcon(post.data.icon) && <Icon name={post.data.icon} size={16} />}
-    <span class="flex-1 text-(--color-fg1)">{post.data.title}</span>
+    <span class={title}>{post.data.title}</span>
   </a>
 </li>

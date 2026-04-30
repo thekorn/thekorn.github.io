@@ -1,26 +1,50 @@
 ---
-import Footer from "@components/Footer.astro";
-import LayoutShell from "@components/LayoutShell.astro";
-import ShellLine from "@components/ShellLine.astro";
-import Layout from "@layouts/Layout.astro";
+import { css } from 'styled-system/css';
+import Footer from '@components/Footer.astro';
+import LayoutShell from '@components/LayoutShell.astro';
+import ShellLine from '@components/ShellLine.astro';
+import Layout from '@layouts/Layout.astro';
 
-const title = "thekorn.dev | Oops...";
+const title = 'thekorn.dev | Oops...';
 const currentPath = Astro.url.pathname;
+
+const container = css({
+  padding: '6',
+});
+
+const header = css({
+  marginBottom: '10',
+});
+
+const h1 = css({
+  fontSize: '3xl',
+  fontWeight: 'bold',
+  color: 'fg0',
+});
+
+const section = css({
+  marginBottom: '10',
+});
+
+const body = css({
+  fontSize: 'lg',
+  lineHeight: 'relaxed',
+  color: 'fg',
+  marginBottom: '6',
+});
 ---
 
 <Layout title={title}>
   <LayoutShell path="~/404.html">
-    <div class="p-6">
-      <header class="mb-10">
+    <div class={container}>
+      <header class={header}>
         <ShellLine>echo $?</ShellLine>
-        <h1 class="text-3xl font-bold text-(--color-fg0)">
-          404 - Page Not Found
-        </h1>
+        <h1 class={h1}>404 - Page Not Found</h1>
       </header>
 
-      <section class="mb-10">
+      <section class={section}>
         <ShellLine>curl {currentPath}</ShellLine>
-        <p class="text-lg leading-relaxed text-(--color-fg) mb-6">
+        <p class={body}>
           404 Not Found
           <br />
           <small>

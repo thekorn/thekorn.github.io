@@ -6,7 +6,17 @@ interface Props {
 const { color } = Astro.props;
 ---
 
-<span
-  class="before:h-4 before:aspect-square before:bg-(--color) before:mr-2 before:inline-block before:align-middle before:border before:border-(--tw-prose-body)"
-  style={`--color:${color}`}
->{color}</span>
+<span class="color-box">{color}</span>
+
+<style define:vars={{ swatch: color }}>
+  .color-box::before {
+    content: '';
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid var(--color-fg);
+    background-color: var(--swatch);
+  }
+</style>

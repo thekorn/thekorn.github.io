@@ -47,7 +47,7 @@ To run a single check, use one of: `pnpm format:check`, `pnpm typecheck`, `pnpm 
 - For Astro components, use `ComponentProps` from `astro/types` for prop types
 
 ```typescript
-import type { ComponentProps } from "astro/types";
+import type { ComponentProps } from 'astro/types';
 ```
 
 ### Formatting (oxfmt/Prettier)

@@ -1,8 +1,8 @@
 ---
-title: "Hello, World!"
-description: "Welcome to my new blog built with Astro"
-pubDate: "2025-12-24"
-icon: "Donut"
+title: 'Hello, World!'
+description: 'Welcome to my new blog built with Astro'
+pubDate: '2025-12-24'
+icon: 'Donut'
 ---
 
 Welcome to my new blog! This site is built with:

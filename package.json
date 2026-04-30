@@ -16,23 +16,23 @@
     "test": "pnpm format:check && pnpm typecheck && pnpm lint && pnpm stylelint"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.8",
-    "@astrojs/mdx": "^5.0.2",
-    "@astrojs/sitemap": "^3.7.1",
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/mdx": "^5.0.4",
+    "@astrojs/sitemap": "^3.7.2",
     "@fontsource-variable/inter": "^5.2.8",
-    "@lucide/astro": "^0.577.0",
-    "@tailwindcss/vite": "^4.2.2",
-    "astro": "^6.0.8",
-    "schema-dts": "^1.1.5",
-    "tailwindcss": "^4.2.2"
+    "@lucide/astro": "^1.14.0",
+    "@tailwindcss/vite": "^4.2.4",
+    "astro": "^6.1.10",
+    "schema-dts": "^2.0.0",
+    "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@shikijs/rehype": "^4.0.2",
     "@tailwindcss/typography": "^0.5.19",
-    "oxfmt": "^0.41.0",
-    "oxlint": "^1.56.0",
-    "stylelint": "^17.5.0",
+    "oxfmt": "^0.47.0",
+    "oxlint": "^1.62.0",
+    "stylelint": "^17.9.1",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-config-tailwindcss": "^1.0.1"
   },

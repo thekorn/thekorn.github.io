@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import CTAButton from "@components/CTAButton.astro";
-import Github from "@lucide/astro/icons/github";
-import Linkedin from "@lucide/astro/icons/linkedin";
+import GithubBrandIcon from "@components/icons/github-brand";
+import LinkedinBrandIcon from "@components/icons/linkedin-brand";
 import Mail from "@lucide/astro/icons/mail";
 import PostItem from "@components/PostItem.astro";
 import Layout from "@layouts/Layout.astro";
@@ -52,7 +52,7 @@ const posts = (
         <div class="flex flex-wrap gap-3">
           <CTAButton
             href="https://github.com/thekorn"
-            icon={Github}
+            icon={GithubBrandIcon}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -60,7 +60,7 @@ const posts = (
           </CTAButton>
           <CTAButton
             href="https://www.linkedin.com/in/markuskorn/"
-            icon={Linkedin}
+            icon={LinkedinBrandIcon}
             target="_blank"
             rel="noopener noreferrer"
           >
